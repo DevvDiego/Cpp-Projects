@@ -1,36 +1,36 @@
-#include<vector>
-#include<string>
+#include <vector>
+#include <string>
 
 class Parking{
 
     private:
-    std::string nombre;
-    std::vector<std::string> matriculas;
+    std::string name;
+    std::vector<std::string> plates;
 
     public:
 
                                             //inicializando metodos
-    Parking(std::string nombre, int tamaño) : matriculas(tamaño,"") {
-        this->nombre = nombre; 
+    Parking(std::string name, int tamaño) : plates(tamaño,"") {
+        this->name = name; 
 
     }
 
     std::string getNombre(){
-        return this->nombre;
+        return this->name;
 
     }
 
-    void Entrada(std::string matricula, int plaza){
+    void Entrada(std::string plate, int plaza){
         
-        if( matricula.length() < 4 || matricula == "" ){
-            throw "Matricula incorrecta";
+        if( plate.length() < 4 || plate == "" ){
+            throw "plate incorrecta";
         }
 
-        if( !this->matriculas.at(plaza).empty() ){
+        if( !this->plates.at(plaza).empty() ){
             throw "Plaza ya ocupada";
         }
 
-        if( itExists(matricula) ){
+        if( itExists(plate) ){
             throw "Matricula repetida";
         }
 
@@ -40,7 +40,7 @@ class Parking{
     bool itExists(std::string item){
 
         bool foundFlag = false;
-        for(const auto &matricula : matriculas){
+        for(const auto &matricula : plates){
             if(matricula == item){
                 return true;
             }
