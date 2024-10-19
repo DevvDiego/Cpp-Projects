@@ -5,6 +5,7 @@ int main(){
 
     Parking parking("ola", 10);
     
+    parking.Entrada("000-MEX", 0);
     parking.Entrada("123-MEX", 1);
     parking.Entrada("321-MEX", 2);
     parking.Entrada("456-MEX", 3);
@@ -15,6 +16,17 @@ int main(){
     parking.Entrada("631-MEX", 8);
     parking.Entrada("247-MEX", 9);
     parking.Entrada("742-MEX", 10);
+
+
+
+    std::cout<<parking.toString();
+
+
+
+
+
+
+
 
     // CASO: Salida exitosa
     // std::cout<<"Salida de main: "<<parking.Salida("247-MEX")<<std::endl;

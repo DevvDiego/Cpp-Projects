@@ -38,6 +38,7 @@ class Parking{
 
                                           //inicializando metodos
     Parking(std::string name, int size) : plates(size,"") {
+
         this->name = name;
         this->occupiedSpots = 0;
     }
@@ -118,13 +119,29 @@ class Parking{
         return this->name;
     }
 
-    // std::string toString(){
-    //     std::cout<<
-    //     "\nParking " + this->name + "\n" +
-    //     "---------------\n" + ""
+    std::string toString(){
+        
+        std::string output = "NO DATA";
 
-    //     <<std::flush;
-    // }
+        output = output + "\n\nParking " + this->name + "\n";
+        output = output + "---------------\n";
+        // std::cout<<
+        // "\n\nParking " + this->name + "\n" +
+        // "---------------\n";
+
+        
+        for (int i = 0; i<plates.size(); i++){
+
+            output = output + "Plaza " + std::to_string(i) + ": " + getSpotPlate(i) + "\n";
+        }
+
+        // for (int i = 0; i<plates.size(); i++){
+
+        //     std::cout<<"Plaza "<<  i << ": "<< getSpotPlate(i)<<std::endl;
+        // }
+
+        return output;
+    }
 
     int getTotalSpots(){
 
@@ -158,7 +175,15 @@ class Parking{
         return false;
     }
 
+    std::string getSpotPlate(int spot){
 
+        if( plates[spot] == "" ){
+
+            return "(vacio)";
+        }
+
+        return plates[spot];
+    }
 
     int linearSearch(const std::string& target, int mode = 1){
 
