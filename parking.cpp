@@ -1,28 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #include <vector>
 #include <string>
 #include <iostream>
@@ -105,21 +80,16 @@ class Parking{
             return result;
         }catch(char const* e){
 
-            std::cout<<e<<"\n\n";
+            std::cerr<<e<<"\n\n";
         }
 
         return 1;
     }
 
-    std::string getNombre(){
-
-        return this->name;
-    }
-
     std::string toString(){
         
         std::string output;
-        output = output + "\nParking " + this->name + "\n";
+        output = output + "\n" + this->name + "\n";
         output = output + "---------------\n";
         
         for (int i = 0; i<plates.size(); i++){
@@ -128,6 +98,11 @@ class Parking{
         }
 
         return output;
+    }
+
+    std::string getNombre(){
+
+        return this->name;
     }
 
     int getTotalSpots(){
@@ -144,12 +119,6 @@ class Parking{
 
         return this->plates.size() - this->occupiedSpots;
     }
-
-    // std::string getSpotPlate(int spot){
-        
-    //     return plates[spot];
-    // }
-
 
     private:
     bool itExists(std::string item){
