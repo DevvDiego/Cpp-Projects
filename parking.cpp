@@ -1,3 +1,28 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #include <vector>
 #include <string>
 #include <iostream>
@@ -7,12 +32,14 @@ class Parking{
     private:
     std::string name;
     std::vector<std::string> plates;
+    int occupiedSpots;
 
     public:
 
                                           //inicializando metodos
     Parking(std::string name, int size) : plates(size,"") {
         this->name = name;
+        this->occupiedSpots = 0;
     }
 
     void Entrada(std::string plate, int spot){
@@ -49,6 +76,7 @@ class Parking{
             }
 
             this->plates[spot] = plate;
+            occupiedSpots++;
         }catch(const char* e){
 
             std::cerr << e << '\n';
@@ -56,34 +84,101 @@ class Parking{
         
     }
 
+    int Salida(std::string plate){
+        
+        try{
+
+            //result is the index that the element was found in
+            int result = linearSearch(plate, 2);
+            
+            if( result == -1 ){
+
+                throw "Matricula no existente";
+            }
+
+            //set spot with a null plate
+            plates[result] = ""; //"" means Null for a string
+            occupiedSpots--;
+
+            //returns the index where it was found
+            return result;
+        }catch(char const* e){
+
+            std::cout<<e<<"\n\n";
+        }
+
+        return 1;
+    }
+
+
+
+
     std::string getNombre(){
 
         return this->name;
     }
 
-    std::string getSpotPlate(int spot){
-        return plates[spot];
-    }
+    // std::string toString(){
+    //     std::cout<<
+    //     "\nParking " + this->name + "\n" +
+    //     "---------------\n" + ""
 
-    size_t getMaxSpots(){
+    //     <<std::flush;
+    // }
+
+    int getTotalSpots(){
 
         return this->plates.size();
     }
+
+    int getOccupiedSpots(){
+
+        return this->occupiedSpots;
+    }
+
+    int getFreeSpots(){
+
+        return this->plates.size() - this->occupiedSpots;
+    }
+
+    // std::string getSpotPlate(int spot){
+        
+    //     return plates[spot];
+    // }
 
 
     private:
     bool itExists(std::string item){
 
-        //? place value by reference instead of value
-        for(int i = 0; i<plates.size(); i++){
+        if( linearSearch(item) != -1 ){
 
-            if(plates[i] == item){
-                
-                return true;
-            }
+            return true;
         }
 
         return false;
+    }
+
+
+
+    int linearSearch(const std::string& target, int mode = 1){
+
+        for(int i; i < plates.size(); i++){
+
+            if(plates[i] == target){
+                
+                switch(mode){
+                    case 1:
+                        return 1; //it is true that the element exists
+
+                    case 2:
+                        return i; //returns the index where it was found
+                }
+            }
+        }
+
+        //using -1 to differentiate a NOT FOUND
+        //of a index at 0 found
+        return -1; //not found
     }
 
 };

@@ -16,9 +16,14 @@ int main(){
     parking.Entrada("247-MEX", 9);
     parking.Entrada("742-MEX", 10);
 
+    // CASO: Salida exitosa
+    // std::cout<<"Salida de main: "<<parking.Salida("247-MEX")<<std::endl;
+    // if(parking.getSpotPlate(9) == ""){
+    //     std::cout<<"Valor realmente eliminado"<<std::endl;
+    // }
 
-    std::cout<<parking.getMaxSpots()<<std::endl;
-
+    // CASO: Salida fallida
+    // std::cout<<"Salida de main: "<<parking.Salida("247000-MEX")<<std::endl;
 
     // CASO: Matricula < 4
     // parking.Entrada("12", 20);
