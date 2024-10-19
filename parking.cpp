@@ -111,9 +111,6 @@ class Parking{
         return 1;
     }
 
-
-
-
     std::string getNombre(){
 
         return this->name;
@@ -121,24 +118,14 @@ class Parking{
 
     std::string toString(){
         
-        std::string output = "NO DATA";
-
-        output = output + "\n\nParking " + this->name + "\n";
+        std::string output;
+        output = output + "\nParking " + this->name + "\n";
         output = output + "---------------\n";
-        // std::cout<<
-        // "\n\nParking " + this->name + "\n" +
-        // "---------------\n";
-
         
         for (int i = 0; i<plates.size(); i++){
 
             output = output + "Plaza " + std::to_string(i) + ": " + getSpotPlate(i) + "\n";
         }
-
-        // for (int i = 0; i<plates.size(); i++){
-
-        //     std::cout<<"Plaza "<<  i << ": "<< getSpotPlate(i)<<std::endl;
-        // }
 
         return output;
     }
