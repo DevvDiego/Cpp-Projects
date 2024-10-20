@@ -2,6 +2,8 @@
 #include "parking.cpp"
 
 int main(){
+    //TODO Make the parking size to act to the user as a 1-10 not 0-10
+    // ? is it achievable?
 
     int opcion;
 
@@ -11,24 +13,12 @@ int main(){
 
     Parking parking("Parking Centro", 10);
 
-
-    parking.Entrada("000-MEX", 0);
-    parking.Entrada("123-MEX", 1);
-    parking.Entrada("321-MEX", 2);
-    parking.Entrada("456-MEX", 3);
-    parking.Entrada("654-MEX", 4);
-    parking.Entrada("789-MEX", 5);
-    parking.Entrada("987-MEX", 6);
-    parking.Entrada("136-MEX", 7);
-    parking.Entrada("631-MEX", 8);
-    parking.Entrada("247-MEX", 9);
-    parking.Entrada("742-MEX", 10);
-
     while( !endProgram ){
 
         std::cout<<"\n\n\n-------------------\n";
         std::cout<<"Parking centro\n";
-        std::cout<<"Elige una opcion\n1)Entrada de coche\n2)Salida de coche\n3)Mostrar todo\n4)Salir del programa\n";
+        std::cout<<"Elige una opcion\n"<<
+        "1) Entrada de coche\n2) Salida de coche\n3) Mostrar todo\n4) Salir del programa\n";
         
         // \b se usa para regresar un caracter anterior en la terminal
         std::cout<<"-------(   )-------\b\b\b\b\b\b\b\b\b\b";
