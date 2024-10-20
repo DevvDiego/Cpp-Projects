@@ -1,5 +1,24 @@
 #include <iostream>
+#include <limits>
 #include "parking.cpp"
+
+
+/**
+ * Uses cin to read from ifstream, and checks if there is a failbit or badbit set or not.
+*/
+template <typename T>
+void input(T &variableToWrite){
+
+    std::cin>>variableToWrite;
+
+    if(std::cin.fail()){ //wrong data type recieved
+        
+        std::cin.clear();
+        std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n'); //ignore the full stream buff
+        std::cout<<"\n\n---------ERROR tipo de dato---------\n\n";
+    }
+}
+
 
 int main(){
     //TODO Make the parking size to act to the user as a 1-10 not 0-10
@@ -22,29 +41,21 @@ int main(){
         
         // \b se usa para regresar un caracter anterior en la terminal
         std::cout<<"-------(   )-------\b\b\b\b\b\b\b\b\b\b";
-        std::cin>>opcion;
+        input(opcion);
         std::cout<<"\n";
-
-
-        // ? control the cin.fail error?
-        // #include <limits> // for std::numeric_limits
-        // #include <ios> // for std::streamsize
-
-        // if (std::cin.fail()) {
-        //     std::cin.clear(); // Clear the error flag
-        //     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore the rest of the line
-        //     std::cout << "\n\n----Opcion incorrecta----\n\n";
-        // }
 
         switch(opcion){
             case 1: //entrada
                 
+            try{
                 //TODO agregar excepciones
                 std::cout<<"Ingresa la matricula: ";
-                std::cin>>matricula;
+                input(matricula);
+                // std::cin>>matricula;
 
                 std::cout<<"Ingresa la plaza: ";
-                std::cin>>plaza;
+                input(plaza);
+                // std::cin>>plaza;
 
                 parking.Entrada(matricula, plaza);
                 //! Errors cant be catched here
@@ -53,12 +64,17 @@ int main(){
                 std::cout<<parking.getTotalSpots()<<" Plazas totales\n";
                 std::cout<<parking.getOccupiedSpots()<<" Plazas ocupadas\n";
                 std::cout<<parking.getFreeSpots()<<" Plazas disponibles"<<std::endl;
+            }catch(std::exception e){
+                std::cout<<"--------ERROR--------\n";
+                std::cout<<e.what();
+            }
             break;
             
             case 2: //salida
 
                 std::cout<<"Ingresa la matricula: ";
-                std::cin>>matricula;
+                input(matricula);
+                // std::cin>>matricula;
 
                 //! Errors cant be catched here
                 parking.Salida(matricula);
@@ -79,9 +95,9 @@ int main(){
                 endProgram = true;
             break;
 
-            default: //only executen when no option got selected
+            // default: //only executen when no option got selected
 
-                std::cout<<"\n\n----Opcion incorrecta----\n\n";
+            //     std::cout<<"\n\n----Opcion incorrecta----\n\n";
         }
     }
 
