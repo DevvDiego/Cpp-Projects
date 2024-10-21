@@ -52,7 +52,7 @@ class Parking{
             throw ParkingException("Matricula repetida");
         }
 
-        this->plates[spot] = plate;
+        this->plates.at(spot) = plate;
         occupiedSpots++;
     }
 
@@ -67,7 +67,7 @@ class Parking{
         }
 
         //set spot with a null plate
-        plates[result] = ""; //"" means Null for a string
+        plates.at(result) = ""; //"" means Null for a string
         occupiedSpots--;
 
         //returns the index where it was found
@@ -121,19 +121,19 @@ class Parking{
 
     std::string getSpotPlate(int spot){
 
-        if( plates[spot] == "" ){
+        if( plates.at(spot) == "" ){
 
             return "(vacio)";
         }
 
-        return plates[spot];
+        return plates.at(spot);
     }
 
     int linearSearch(const std::string& target, int mode = 1){
 
         for(int i; i < plates.size(); i++){
 
-            if(plates[i] == target){
+            if(plates.at(i) == target){
                 
                 switch(mode){
                     case 1:
