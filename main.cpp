@@ -15,7 +15,7 @@ void input(T &variableToWrite){
         
         std::cin.clear();
         std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n'); //ignore the full stream buff
-        throw std::runtime_error("Tipo de dato");
+        throw std::runtime_error("Error de tipo de dato");
     }
 }
 
