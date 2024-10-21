@@ -25,10 +25,11 @@ int main(){
     // ? is it achievable?
 
     int opcion;
-
+    int endProgram = false;
     std::string matricula;
     int plaza;
-    int endProgram = false;
+
+
 
     Parking parking("Parking Centro", 10);
 
@@ -45,10 +46,11 @@ int main(){
         std::cout<<"\n";
 
         switch(opcion){
+
             case 1: //entrada
                 
             try{
-                //TODO agregar excepciones
+                
                 std::cout<<"Ingresa la matricula: ";
                 input(matricula);
                 // std::cin>>matricula;
@@ -58,31 +60,36 @@ int main(){
                 // std::cin>>plaza;
 
                 parking.Entrada(matricula, plaza);
-                //! Errors cant be catched here
+
                 std::cout<<"\n----Ingreso exitoso----\n\n";
 
                 std::cout<<parking.getTotalSpots()<<" Plazas totales\n";
                 std::cout<<parking.getOccupiedSpots()<<" Plazas ocupadas\n";
                 std::cout<<parking.getFreeSpots()<<" Plazas disponibles"<<std::endl;
-            }catch(std::exception e){
+            }catch(ParkingException error){
+
                 std::cout<<"--------ERROR--------\n";
-                std::cout<<e.what();
+                std::cout<<error.what();
             }
             break;
             
             case 2: //salida
-
+            try{
                 std::cout<<"Ingresa la matricula: ";
                 input(matricula);
                 // std::cin>>matricula;
 
-                //! Errors cant be catched here
                 parking.Salida(matricula);
                 std::cout<<"\n----Matricula " + matricula + " eliminado----\n\n";
 
                 std::cout<<parking.getTotalSpots()<<" Plazas totales\n";
                 std::cout<<parking.getOccupiedSpots()<<"  Plazas ocupadas\n";
                 std::cout<<parking.getFreeSpots()<<"  Plazas disponibles"<<std::endl;
+            }catch(ParkingException error){
+
+                std::cout<<"--------ERROR--------\n";
+                std::cout<<error.what();
+            }
             break;
             
             case 3: //mostrar todo

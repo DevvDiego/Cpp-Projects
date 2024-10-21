@@ -1,6 +1,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <ParkingException.cpp>
 
 class Parking{
 
@@ -19,71 +20,58 @@ class Parking{
     }
 
     void Entrada(std::string plate, int spot){
-        try
-        {
-            // "" is like a NULL but for std::strings
-            if( plate.length() < 4 || plate == "" ){
 
-                throw "Matricula incorrecta";
-            }
+        // "" is like a NULL but for std::strings
+        if( plate.length() < 4 || plate == "" ){
 
-            if( spot >= this->plates.size() ){
-
-                while( spot >= this->plates.size() ){
-                    /*
-                    * Sets the new size of the vector to 
-                    * the same size it had, but adds one due to
-                    * it checking always that it has >= of the max size
-                    * 
-                    * (max size plus one)
-                    */
-                    this->plates.resize(this->plates.size() + 1, "");
-                }
-            }
-
-            if( !this->plates.at(spot).empty() ){
-
-                throw "Plaza ya ocupada";
-            }
-
-            if( itExists(plate) ){
-
-                throw "Matricula repetida";
-            }
-
-            this->plates[spot] = plate;
-            occupiedSpots++;
-        }catch(const char* e){
-
-            std::cerr << e << '\n';
+            throw ParkingException("Matricula incorrecta");
         }
-        
+
+        if( spot >= this->plates.size() ){
+
+            while( spot >= this->plates.size() ){
+                
+                /*
+                * Sets the new size of the vector to 
+                * the same size it had, but adds one due to
+                * it checking always that it has >= of the max size
+                * 
+                * (max size plus one)
+                */
+                this->plates.resize( this->plates.size() + 1, "" );
+            }
+        }
+
+        if( !this->plates.at(spot).empty() ){
+
+            throw ParkingException("Plaza ya ocupada");
+        }
+
+        if( itExists(plate) ){
+
+            throw ParkingException("Matricula repetida");
+        }
+
+        this->plates[spot] = plate;
+        occupiedSpots++;
     }
 
     int Salida(std::string plate){
+
+        //result is the index that the element was found in
+        int result = linearSearch(plate, 2);
         
-        try{
+        if( result == -1 ){
 
-            //result is the index that the element was found in
-            int result = linearSearch(plate, 2);
-            
-            if( result == -1 ){
-
-                throw "Matricula no existente";
-            }
-
-            //set spot with a null plate
-            plates[result] = ""; //"" means Null for a string
-            occupiedSpots--;
-
-            //returns the index where it was found
-            return result;
-        }catch(char const* e){
-
-            std::cerr<<e<<"\n\n";
+            throw ParkingException("Matricula no existente");
         }
 
-        return 1;
+        //set spot with a null plate
+        plates[result] = ""; //"" means Null for a string
+        occupiedSpots--;
+
+        //returns the index where it was found
+        return result;
     }
 
     std::string toString(){
