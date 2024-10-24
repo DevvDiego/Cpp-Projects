@@ -151,7 +151,7 @@ class Parking{
 
     int linearSearch(const std::string& target, int mode = 1){
 
-        for(int i; i < plates.size(); i++){
+        for(int i = 0; i < plates.size(); i++){
 
             if(plates.at(i) == target){
                 
