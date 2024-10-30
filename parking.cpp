@@ -75,15 +75,24 @@ class Parking{
     }
 
     std::string toString(){
+        std::string output; 
+        output += this->name + ","; 
+        output += "---------------,"; 
         
-        std::string output;
-        output = output + "\n" + this->name + "\n";
-        output = output + "---------------\n";
-        
-        for (int i = 0; i<plates.size(); i++){
-
-            output = output + "Plaza " + std::to_string(i) + ": " + getSpotPlate(i) + "\n";
+        for (int i = 0; i < plates.size(); i++){
+            output += "Plaza " + std::to_string(i) + ": " + getSpotPlate(i) + ",";
         }
+
+
+
+        // std::string output;
+        // output = output + "\n" + this->name + "\n";
+        // output = output + "---------------\n";
+        
+        // for (int i = 0; i<plates.size(); i++){
+
+        //     output = output + "Plaza " + std::to_string(i) + ": " + getSpotPlate(i) + "\n";
+        // }
 
         return output;
     }
