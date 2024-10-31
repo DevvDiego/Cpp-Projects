@@ -31,7 +31,7 @@ while True:
         "4) Salir del programa\n"
         );
 
-    option = str(input("PYTHON Enter a command: "));
+    option = str(input("--(   )--\b\b\b\b\b"));
 
     if(option == "1"):
         send_cpp(option);
@@ -64,7 +64,7 @@ while True:
         for item in read_cpp():
             print(item);
 
-    elif(option == "4"):
+    elif(option == "4"): #TODO maybe add cpp saving the data it has to a file? and then reloading it on boot?
         send_cpp(option);
         break; #Ends the while loop
 
