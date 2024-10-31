@@ -1,4 +1,4 @@
-import subprocess,os
+import subprocess
 
 def send_cpp(msg):
     # Send the user input to the C++ program's stdin
@@ -7,6 +7,7 @@ def send_cpp(msg):
 
 def read_cpp():
     output = process.stdout.readline().strip()
+    
     return output.split(',');
 
 
@@ -45,9 +46,23 @@ while True:
 
         send_cpp( input("Plaza: ") );
 
-        print(read_cpp())
-        print(read_cpp())
-        print(read_cpp())
+        print( read_cpp() )
+        print( read_cpp() )
+        print( read_cpp() )
+
+    elif(user_input == "2"):
+        send_cpp(user_input); #option
+    
+        print( read_cpp() ); #texto ingresa matricula
+
+        send_cpp( input("Matricula: ") ); #enviar matricula
+    
+        print( read_cpp() ); #Matricula eliminada
+    
+        print( read_cpp() ); #datos
+        print( read_cpp() ); #datos
+        print( read_cpp() ); #datos
+
         
     elif(user_input == "3"):
 
@@ -60,6 +75,3 @@ while True:
 
 process.terminate(); # Terminate the subprocess 
 process.wait(); # Wait for the subprocess to exit
-
-
-os.system("pause");
