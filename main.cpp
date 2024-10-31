@@ -63,33 +63,43 @@ int main(){
 
                     parking.Entrada(matricula, plaza);
 
-                    // std::cout<<"\n----Ingreso exitoso----\n\n";
+                    // std::cout<<"----Ingreso exitoso----\n";
+
                     std::cout<<parking.getTotalSpots()<<" Plazas totales\n";
-                    std::cout<<parking.getOccupiedSpots()<<" Plazas ocupadas\n";
-                    std::cout<<parking.getFreeSpots()<<" Plazas disponibles"<<std::endl;
+                    std::cout<<parking.getOccupiedSpots()<<"  Plazas ocupadas\n";
+                    std::cout<<parking.getFreeSpots()<<"  Plazas disponibles\n";
+
+                    std::cout.flush();
                 }catch(ParkingException error){
 
                     std::cerr<<"--------ERROR--------\n";
-                    std::cerr<<error.what();
+                    std::cerr<<error.what()<<"\n";
+                    std::cout.flush();
                 }
                 break;
                 
                 case 2: //salida
                 try{
-                    std::cout<<"Ingresa la matricula: ";
+                    std::cout<<"Ingresa la matricula: \n";
+                    std::cout.flush();
                     input(matricula);
                     // std::cin>>matricula;
 
                     parking.Salida(matricula);
-                    std::cout<<"\n----Matricula " + matricula + " eliminado----\n\n";
+                    std::cout<<"----Matricula " + matricula + " eliminado----\n";
 
                     std::cout<<parking.getTotalSpots()<<" Plazas totales\n";
                     std::cout<<parking.getOccupiedSpots()<<"  Plazas ocupadas\n";
-                    std::cout<<parking.getFreeSpots()<<"  Plazas disponibles"<<std::endl;
+                    std::cout<<parking.getFreeSpots()<<"  Plazas disponibles\n";
+
+                    std::cout.flush();
+
                 }catch(ParkingException error){
 
                     std::cerr<<"--------ERROR--------\n";
-                    std::cerr<<error.what();
+                    std::cerr<<error.what()<<"\n";
+
+                    std::cout.flush();
                 }
                 break;
                 
@@ -107,11 +117,15 @@ int main(){
         }catch(std::runtime_error error){ //predictable errors
 
             std::cerr<<"--------ERROR--------\n";
-            std::cerr<<error.what();
+            std::cerr<<error.what()<<"\n";
+            
+            std::cout.flush();
         }catch(...){ //any kind of not known errors
-        
+            
             std::cerr<<"--------ERROR--------\n";
-            std::cerr<<"Error desconocido";
+            std::cerr<<"Error desconocido\n";
+            
+            std::cout.flush();
         }
     }
 
