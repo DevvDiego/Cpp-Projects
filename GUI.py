@@ -31,16 +31,10 @@ while True:
         "4) Salir del programa\n"
         );
 
-    user_input = str(input("PYTHON Enter a command: "));
-    
-    if user_input.lower() == 'exit':
+    option = str(input("PYTHON Enter a command: "));
 
-        send_cpp(user_input);
-        print("CPP exit code: ", read_cpp());
-        break
-
-    if(user_input == "1"):
-        send_cpp(user_input);
+    if(option == "1"):
+        send_cpp(option);
 
         send_cpp( input("Matricula: ") );
 
@@ -50,8 +44,8 @@ while True:
         print( read_cpp() )
         print( read_cpp() )
 
-    elif(user_input == "2"):
-        send_cpp(user_input); #option
+    elif(option == "2"):
+        send_cpp(option); #option
     
         print( read_cpp() ); #texto ingresa matricula
 
@@ -63,13 +57,16 @@ while True:
         print( read_cpp() ); #datos
         print( read_cpp() ); #datos
 
-        
-    elif(user_input == "3"):
+    elif(option == "3"):
 
-        send_cpp(user_input);
+        send_cpp(option);
         
         for item in read_cpp():
-            print(item + "\n");
+            print(item);
+
+    elif(option == "4"):
+        send_cpp(option);
+        break; #Ends the while loop
 
 
 
