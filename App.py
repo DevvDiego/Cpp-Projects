@@ -17,14 +17,8 @@ class gui:
         self.root.rowconfigure(0, weight=1)
         self.container.rowconfigure(0, weight=1)
 
-        # self.root.config(bg="black")
-        # self.buttonframe.config(bg="")
         self.resultContainer.config(bg="gray13", width=190)
 
-        self.label.config(
-            text="Ingresar".capitalize(), font=("Roboto", 15),
-            height=2, bg="gray13", fg="white",
-        )
         self.label2.config(
             text="Salida".capitalize(), font=("Roboto", 15),
             height=2, bg="gray13", fg="white",
@@ -62,7 +56,6 @@ class gui:
         self.resultContainer.grid(row=0, column=1, sticky="nswe")
         self.buttonframe.grid(row=1, column=0, sticky="swe")
 
-        self.label.pack(fill="x",  )
         self.label2.pack(fill="x", )
         self.label3.pack(fill="x", )
         self.label4.pack(fill="x", )
@@ -92,8 +85,7 @@ class gui:
         self.btn_guardar = tk.Button(self.buttonframe)
 
 
-        self.pag_ingresar = tk.Frame(self.container)
-        self.label = tk.Label(self.pag_ingresar)
+        self.pag_ingresar = Pagina_Insertar(self.container).getFrame()
 
         self.pag_salida = tk.Frame(self.container)
         self.label2 = tk.Label(self.pag_salida)
@@ -106,10 +98,7 @@ class gui:
         
         # self.pageOneLeftFrame = tk.Frame(self.pag_ingresar)
         # self.pageOneRightFrame = tk.Frame(self.pag_ingresar)
-
-
-
-
+# TODO create the menu for each option and add a button to send data and recieve
     def __init__ (self):
 
         self.createWidgets()
@@ -120,6 +109,45 @@ class gui:
         self.show(self.pag_ingresar)
 
         self.root.mainloop()
+
+
+class Pagina_Insertar:
+
+    def __init__(self, frameContainer):
+        self.frame = tk.Frame(frameContainer)
+        
+        self.createWidgets()
+        self.configWidgets()
+        self.placeWidgets()
+
+    def configWidgets(self):
+        self.title.config(
+            text="Ingresar".capitalize(), font=("Roboto", 15),
+            height=2, bg="gray13",fg="white",
+        )
+
+
+        self.inputPlateLabel.config(text="Ingresa la matricula", font=("Roboto", 12))
+        self.inputPlate.config(textvariable=self.matricula)
+
+    def placeWidgets(self):
+        self.title.pack(fill="x")
+        self.inputPlateLabel.pack()
+        self.inputPlate.pack()
+       
+
+    def createWidgets(self):
+        self.title = tk.Label(self.frame)
+
+        self.matricula = tk.StringVar()
+        self.inputPlateLabel = tk.Label(self.frame)
+        self.inputPlate = tk.Entry(self.frame) 
+
+    def getMatricula(self):
+        return self.matricula.get()
+        
+    def getFrame(self):
+        return self.frame
 
 
 gui()
