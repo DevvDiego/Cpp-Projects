@@ -12,7 +12,7 @@ class Mostrar:
 
     def configWidgets(self):
         self.title.config(
-            text="Ingresar".capitalize(), font=("Roboto", 15),
+            text="Parking".capitalize(), font=("Roboto", 15),
             height=2, bg="gray13", fg="white",
         )
 
