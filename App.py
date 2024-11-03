@@ -130,37 +130,24 @@ class Section_Mostrar:
             height=2, bg="gray13", fg="white",
         )
 
-        # self.inputPlateLabel.config(text="Ingresa la matricula", font=("Roboto", 12), bg="gray8" , fg="white",)
-        # self.inputPlate.config(textvariable=self.plate)
-        # self.text.config(
-        #     font=("Roboto", 12), bg="gray8" , fg="white",
-            
-        # )
 
-        # self.text.insert("1.0","asd\nasdasd\nasdasd\nasdasd\nasd")
-
-        # # scrolledtext.ScrolledText(frame, wrap=tk.WORD, width=50, height=15)
-        # self.text = tk.Tk(frame, wrap=tk.WORD, width=50, height=15)
-        # self.text.pack(fill=tk.BOTH, expand=True)
+        # ? make it fixed size or responsive
+        self.text.config(
+            font=("Roboto", 10), bg="gray8" , fg="white", cursor="",
+            wrap=tk.WORD, width=30,
+            state=tk.DISABLED,
+        )
 
 
     def placeWidgets(self):
-        self.title.pack(fill="x")
-        
-        # self.inputPlateLabel.pack(pady=(40,0))
-        # self.inputPlate.pack()
 
-        # self.text.propagate = False
-        # self.text.pack()
+        self.title.pack(fill="x")
+        self.text.pack(fill="none", expand=None)
 
     def createWidgets(self):
+
         self.title = tk.Label(self.frame)
-
-        # self.plate = tk.StringVar()
-        # self.inputPlateLabel = tk.Label(self.frame)
-        # self.inputPlate = tk.Entry(self.frame)
-
-        # self.text = scrolledtext.ScrolledText(self.frame)
+        self.text = scrolledtext.ScrolledText(self.frame)
         
 
     def getFrame(self):
