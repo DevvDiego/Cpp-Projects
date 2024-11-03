@@ -19,10 +19,6 @@ class gui:
 
         self.resultContainer.config(bg="gray13", width=190)
 
-        self.label2.config(
-            text="Salida".capitalize(), font=("Roboto", 15),
-            height=2, bg="gray13", fg="white",
-        )
         self.label3.config(
             text="Mostrar".capitalize(), font=("Roboto", 15),
             height=2, bg="gray13", fg="white",
@@ -56,7 +52,6 @@ class gui:
         self.resultContainer.grid(row=0, column=1, sticky="nswe")
         self.buttonframe.grid(row=1, column=0, sticky="swe")
 
-        self.label2.pack(fill="x", )
         self.label3.pack(fill="x", )
         self.label4.pack(fill="x", )
 
@@ -86,9 +81,7 @@ class gui:
 
 
         self.pag_ingresar = Pagina_Insertar(self.container).getFrame()
-
-        self.pag_salida = tk.Frame(self.container)
-        self.label2 = tk.Label(self.pag_salida)
+        self.pag_salida = Pagina_Salida(self.container).getFrame()
 
         self.pag_mostrar = tk.Frame(self.container)
         self.label3 = tk.Label(self.pag_mostrar)
@@ -152,8 +145,6 @@ class Pagina_Insertar:
 
         self.btnEnviar.pack()
 
-       
-
     def createWidgets(self):
         self.title = tk.Label(self.frame)
 
@@ -173,6 +164,69 @@ class Pagina_Insertar:
 
     def getFrame(self):
         return self.frame
+
+
+class Pagina_Salida:
+
+    def __init__(self, frameContainer):
+        self.frame = tk.Frame(frameContainer)
+
+        self.createWidgets()
+        self.configWidgets()
+        self.placeWidgets()
+
+    def configWidgets(self):
+        self.title.config(
+            text="Ingresar".capitalize(), font=("Roboto", 15),
+            height=2, bg="gray13",fg="white",
+        )
+
+        self.inputPlateLabel.config(text="Ingresa la matricula", font=("Roboto", 12))
+        self.inputPlate.config(textvariable=self.plate)
+
+        # self.inputSpotLabel.config(text="Ingresa el lugar", font=("Roboto", 12))
+        # self.inputSpot.config(textvariable=self.spot)
+
+        self.spacer.config(text="", pady=20)
+
+        self.btnEnviar.config(
+            text="Aceptar", font=("Verdana", 10),
+            padx=5, pady=5, command=lambda: print("Plate: " + self.inputPlate.get())
+        )
+
+    def placeWidgets(self):
+        self.title.pack(fill="x")
+        
+        self.inputPlateLabel.pack(pady=(40,0))
+        self.inputPlate.pack()
+
+        # self.inputSpotLabel.pack(pady=(40,0))
+        # self.inputSpot.pack()
+
+        self.spacer.pack()
+
+        self.btnEnviar.pack() 
+
+    def createWidgets(self):
+        self.title = tk.Label(self.frame)
+
+        self.plate = tk.StringVar()
+        self.inputPlateLabel = tk.Label(self.frame)
+        self.inputPlate = tk.Entry(self.frame)
+
+        # self.spot = tk.StringVar()
+        # self.inputSpotLabel = tk.Label(self.frame)
+        # self.inputSpot = tk.Entry(self.frame)
+
+        self.spacer = tk.Label(self.frame)
+
+        self.btnEnviar = tk.Button(self.frame)
+
+        # self.btn = tk.Button(self.frame, text="Mandar", command=lambda: print(self.matricula.get()))
+
+    def getFrame(self):
+        return self.frame
+
 
 
 gui()
