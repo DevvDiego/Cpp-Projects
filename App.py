@@ -1,5 +1,9 @@
 import tkinter as tk
 from tkinter import scrolledtext
+from pages.Guardar import Guardar 
+from pages.Insertar import Insertar 
+from pages.Mostrar import Mostrar 
+from pages.Salida import Salida 
 
 
 class gui:
@@ -19,17 +23,9 @@ class gui:
         self.container.rowconfigure(0, weight=1)
 
         self.resultContainer.config(bg="gray13", width=190)
+
+        #! Not a page, but a section right side of the root frame
         self.pag_mostrar.config(bg="gray13")
-
-        # self.label3.config(
-        #     text="Mostrar".capitalize(), font=("Roboto", 15),
-        #     height=2, bg="gray13", fg="white",
-        # )
-        self.label4.config(
-            text="Guardar".capitalize(), font=("Roboto", 15),
-            height=2, bg="gray13", fg="white",
-        )
-
 
 
         self.btn_ingresar.config(
@@ -40,10 +36,6 @@ class gui:
             text="Salida",  width=8, cursor="hand2",
             command=lambda: self.show(self.pag_salida)
         )
-        # self.btn_mostrar.config( #check createWidgets
-        #     text="Mostrar", width=8, cursor="hand2",
-        #     command=lambda: self.show(self.pag_mostrar)
-        # )
         self.btn_guardar.config(
             text="Guardar", width=8, cursor="hand2", 
             command=lambda: self.show(self.pag_guardar)
@@ -54,15 +46,12 @@ class gui:
         self.resultContainer.grid(row=0, column=1, sticky="nswe")
         self.buttonframe.grid(row=1, column=0, sticky="swe")
 
-        # self.label3.pack(fill="x", )
-        self.label4.pack(fill="x", )
+        #! Not a page, but a section right side of the root frame
+        self.pag_mostrar.pack(fill="x", padx=10)
+
 
         self.pag_ingresar.place(x=0, y=0, relwidth=1, relheight=1)
         self.pag_salida.place(x=0, y=0, relwidth=1, relheight=1)
-
-        self.pag_mostrar.pack(fill="x", padx=10)
-
-        # self.pag_mostrar.place(x=0, y=0, relwidth=1, relheight=1) #CHECK createWidgets
         self.pag_guardar.place(x=0, y=0, relwidth=1, relheight=1)
 
         self.btn_ingresar.pack(side="left", padx=(0,5))
@@ -85,24 +74,12 @@ class gui:
         # ? self.btn_mostrar = tk.Button(self.buttonframe) #remove button? "dynamic" reload?
         self.btn_guardar = tk.Button(self.buttonframe)
 
-
-        self.pag_mostrar = Section_Mostrar(self.resultContainer).getFrame()
-
-
-        self.pag_ingresar = Pagina_Insertar(self.container).getFrame()
-        self.pag_salida = Pagina_Salida(self.container).getFrame()
-
-        # TODO right side of app should let you see the 
-        # self.pag_mostrar = tk.Frame(self.container)
-        # self.label3 = tk.Label(self.pag_mostrar)
-        
-
+        self.pag_mostrar = Mostrar(self.resultContainer).getFrame()
+        self.pag_ingresar = Insertar(self.container).getFrame()
+        self.pag_salida = Salida(self.container).getFrame()
         # TODO make saving to a mysql BDD
-        self.pag_guardar = tk.Frame(self.container)
-        self.label4 =tk.Label(self.pag_guardar)
-        
-        # self.pageOneLeftFrame = tk.Frame(self.pag_ingresar)
-        # self.pageOneRightFrame = tk.Frame(self.pag_ingresar)
+        self.pag_guardar = Guardar(self.container).getFrame()
+
 # TODO create the menu for each option and add a button to send data and recieve
     def __init__ (self):
 
@@ -114,172 +91,6 @@ class gui:
         self.show(self.pag_ingresar)
 
         self.root.mainloop()
-
-class Section_Mostrar:
-
-    def __init__(self, frameContainer):
-        self.frame = tk.Frame(frameContainer)
-
-        self.createWidgets()
-        self.configWidgets()
-        self.placeWidgets()
-
-    def configWidgets(self):
-        self.title.config(
-            text="Ingresar".capitalize(), font=("Roboto", 15),
-            height=2, bg="gray13", fg="white",
-        )
-
-
-        # ? make it fixed size or responsive
-        self.text.config(
-            font=("Roboto", 10), bg="gray8" , fg="white", cursor="",
-            wrap=tk.WORD, width=30,
-            state=tk.DISABLED,
-        )
-
-
-    def placeWidgets(self):
-
-        self.title.pack(fill="x")
-        self.text.pack(fill="none", expand=None)
-
-    def createWidgets(self):
-
-        self.title = tk.Label(self.frame)
-        self.text = scrolledtext.ScrolledText(self.frame)
-        
-
-    def getFrame(self):
-        return self.frame
-    
-
-
-class Pagina_Insertar:
-
-    def __init__(self, frameContainer):
-        self.frame = tk.Frame(frameContainer)
-
-        self.createWidgets()
-        self.configWidgets()
-        self.placeWidgets()
-
-    def configWidgets(self):
-        self.title.config(
-            text="Ingresar".capitalize(), font=("Roboto", 15),
-            height=2, bg="gray13",fg="white",
-        )
-
-        self.inputPlateLabel.config(text="Ingresa la matricula", font=("Roboto", 12))
-        self.inputPlate.config(textvariable=self.plate)
-
-        self.inputSpotLabel.config(text="Ingresa el lugar", font=("Roboto", 12))
-        self.inputSpot.config(textvariable=self.spot)
-
-        self.spacer.config(text="", pady=20)
-
-        self.btnEnviar.config(
-            text="Aceptar", font=("Verdana", 10),
-            padx=5, pady=5, command=lambda: print("Plate: " + self.inputPlate.get() + " Spot: " + self.spot.get())
-        )
-
-    def placeWidgets(self):
-        self.title.pack(fill="x")
-        
-        self.inputPlateLabel.pack(pady=(40,0))
-        self.inputPlate.pack()
-
-        self.inputSpotLabel.pack(pady=(40,0))
-        self.inputSpot.pack()
-
-        self.spacer.pack()
-
-        self.btnEnviar.pack()
-
-    def createWidgets(self):
-        self.title = tk.Label(self.frame)
-
-        self.plate = tk.StringVar()
-        self.inputPlateLabel = tk.Label(self.frame)
-        self.inputPlate = tk.Entry(self.frame)
-
-        self.spot = tk.StringVar()
-        self.inputSpotLabel = tk.Label(self.frame)
-        self.inputSpot = tk.Entry(self.frame)
-
-        self.spacer = tk.Label(self.frame)
-
-        self.btnEnviar = tk.Button(self.frame)
-
-        # self.btn = tk.Button(self.frame, text="Mandar", command=lambda: print(self.matricula.get()))
-
-    def getFrame(self):
-        return self.frame
-
-
-class Pagina_Salida:
-
-    def __init__(self, frameContainer):
-        self.frame = tk.Frame(frameContainer)
-
-        self.createWidgets()
-        self.configWidgets()
-        self.placeWidgets()
-
-    def configWidgets(self):
-        self.title.config(
-            text="Salida".capitalize(), font=("Roboto", 15),
-            height=2, bg="gray13",fg="white",
-        )
-
-        self.inputPlateLabel.config(text="Ingresa la matricula", font=("Roboto", 12))
-        self.inputPlate.config(textvariable=self.plate)
-
-        # self.inputSpotLabel.config(text="Ingresa el lugar", font=("Roboto", 12))
-        # self.inputSpot.config(textvariable=self.spot)
-
-        self.spacer.config(text="", pady=20)
-
-        # TODO: add way that after clicking, the right dark side of the root frame, shows the parking
-        # self.btnEnviar.bind()
-        self.btnEnviar.config(
-            text="Aceptar", font=("Verdana", 10),
-            padx=5, pady=5, command=lambda: print("Plate: " + self.inputPlate.get())
-        )
-
-    def placeWidgets(self):
-        self.title.pack(fill="x")
-        
-        self.inputPlateLabel.pack(pady=(40,0))
-        self.inputPlate.pack()
-
-        # self.inputSpotLabel.pack(pady=(40,0))
-        # self.inputSpot.pack()
-
-        self.spacer.pack()
-
-        self.btnEnviar.pack() 
-
-    def createWidgets(self):
-        self.title = tk.Label(self.frame)
-
-        self.plate = tk.StringVar()
-        self.inputPlateLabel = tk.Label(self.frame)
-        self.inputPlate = tk.Entry(self.frame)
-
-        # self.spot = tk.StringVar()
-        # self.inputSpotLabel = tk.Label(self.frame)
-        # self.inputSpot = tk.Entry(self.frame)
-
-        self.spacer = tk.Label(self.frame)
-
-        self.btnEnviar = tk.Button(self.frame)
-
-        # self.btn = tk.Button(self.frame, text="Mandar", command=lambda: print(self.matricula.get()))
-
-    def getFrame(self):
-        return self.frame
-
 
 
 gui()
