@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter import scrolledtext
 from pages.Guardar import Guardar 
 from pages.Insertar import Insertar 
 from pages.Mostrar import Mostrar 
