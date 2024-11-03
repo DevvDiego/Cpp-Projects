@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import scrolledtext
 
 
 class gui:
@@ -18,11 +19,12 @@ class gui:
         self.container.rowconfigure(0, weight=1)
 
         self.resultContainer.config(bg="gray13", width=190)
+        self.pag_mostrar.config(bg="gray13")
 
-        self.label3.config(
-            text="Mostrar".capitalize(), font=("Roboto", 15),
-            height=2, bg="gray13", fg="white",
-        )
+        # self.label3.config(
+        #     text="Mostrar".capitalize(), font=("Roboto", 15),
+        #     height=2, bg="gray13", fg="white",
+        # )
         self.label4.config(
             text="Guardar".capitalize(), font=("Roboto", 15),
             height=2, bg="gray13", fg="white",
@@ -38,10 +40,10 @@ class gui:
             text="Salida",  width=8, cursor="hand2",
             command=lambda: self.show(self.pag_salida)
         )
-        self.btn_mostrar.config(
-            text="Mostrar", width=8, cursor="hand2",
-            command=lambda: self.show(self.pag_mostrar)
-        )
+        # self.btn_mostrar.config( #check createWidgets
+        #     text="Mostrar", width=8, cursor="hand2",
+        #     command=lambda: self.show(self.pag_mostrar)
+        # )
         self.btn_guardar.config(
             text="Guardar", width=8, cursor="hand2", 
             command=lambda: self.show(self.pag_guardar)
@@ -52,17 +54,20 @@ class gui:
         self.resultContainer.grid(row=0, column=1, sticky="nswe")
         self.buttonframe.grid(row=1, column=0, sticky="swe")
 
-        self.label3.pack(fill="x", )
+        # self.label3.pack(fill="x", )
         self.label4.pack(fill="x", )
 
         self.pag_ingresar.place(x=0, y=0, relwidth=1, relheight=1)
         self.pag_salida.place(x=0, y=0, relwidth=1, relheight=1)
-        self.pag_mostrar.place(x=0, y=0, relwidth=1, relheight=1)
+
+        self.pag_mostrar.pack(fill="x", padx=10)
+
+        # self.pag_mostrar.place(x=0, y=0, relwidth=1, relheight=1) #CHECK createWidgets
         self.pag_guardar.place(x=0, y=0, relwidth=1, relheight=1)
 
         self.btn_ingresar.pack(side="left", padx=(0,5))
         self.btn_salida.pack(side="left", padx=(0,5))
-        self.btn_mostrar.pack(side="left", padx=(0,5))
+        # self.btn_mostrar.pack(side="left", padx=(0,5)) #CHECK createWidgets
         self.btn_guardar.pack(side="left", padx=(0,5))
 
     def createWidgets(self):
@@ -74,18 +79,25 @@ class gui:
         self.resultContainer = tk.Frame(self.root)
         self.buttonframe = tk.Frame(self.container)
 
+
         self.btn_ingresar = tk.Button(self.buttonframe)
         self.btn_salida = tk.Button(self.buttonframe)
-        self.btn_mostrar = tk.Button(self.buttonframe)
+        # ? self.btn_mostrar = tk.Button(self.buttonframe) #remove button? "dynamic" reload?
         self.btn_guardar = tk.Button(self.buttonframe)
+
+
+        self.pag_mostrar = Section_Mostrar(self.resultContainer).getFrame()
 
 
         self.pag_ingresar = Pagina_Insertar(self.container).getFrame()
         self.pag_salida = Pagina_Salida(self.container).getFrame()
 
-        self.pag_mostrar = tk.Frame(self.container)
-        self.label3 = tk.Label(self.pag_mostrar)
+        # TODO right side of app should let you see the 
+        # self.pag_mostrar = tk.Frame(self.container)
+        # self.label3 = tk.Label(self.pag_mostrar)
+        
 
+        # TODO make saving to a mysql BDD
         self.pag_guardar = tk.Frame(self.container)
         self.label4 =tk.Label(self.pag_guardar)
         
@@ -102,6 +114,58 @@ class gui:
         self.show(self.pag_ingresar)
 
         self.root.mainloop()
+
+class Section_Mostrar:
+
+    def __init__(self, frameContainer):
+        self.frame = tk.Frame(frameContainer)
+
+        self.createWidgets()
+        self.configWidgets()
+        self.placeWidgets()
+
+    def configWidgets(self):
+        self.title.config(
+            text="Ingresar".capitalize(), font=("Roboto", 15),
+            height=2, bg="gray13", fg="white",
+        )
+
+        # self.inputPlateLabel.config(text="Ingresa la matricula", font=("Roboto", 12), bg="gray8" , fg="white",)
+        # self.inputPlate.config(textvariable=self.plate)
+        # self.text.config(
+        #     font=("Roboto", 12), bg="gray8" , fg="white",
+            
+        # )
+
+        # self.text.insert("1.0","asd\nasdasd\nasdasd\nasdasd\nasd")
+
+        # # scrolledtext.ScrolledText(frame, wrap=tk.WORD, width=50, height=15)
+        # self.text = tk.Tk(frame, wrap=tk.WORD, width=50, height=15)
+        # self.text.pack(fill=tk.BOTH, expand=True)
+
+
+    def placeWidgets(self):
+        self.title.pack(fill="x")
+        
+        # self.inputPlateLabel.pack(pady=(40,0))
+        # self.inputPlate.pack()
+
+        # self.text.propagate = False
+        # self.text.pack()
+
+    def createWidgets(self):
+        self.title = tk.Label(self.frame)
+
+        # self.plate = tk.StringVar()
+        # self.inputPlateLabel = tk.Label(self.frame)
+        # self.inputPlate = tk.Entry(self.frame)
+
+        # self.text = scrolledtext.ScrolledText(self.frame)
+        
+
+    def getFrame(self):
+        return self.frame
+    
 
 
 class Pagina_Insertar:
@@ -177,7 +241,7 @@ class Pagina_Salida:
 
     def configWidgets(self):
         self.title.config(
-            text="Ingresar".capitalize(), font=("Roboto", 15),
+            text="Salida".capitalize(), font=("Roboto", 15),
             height=2, bg="gray13",fg="white",
         )
 
@@ -189,6 +253,8 @@ class Pagina_Salida:
 
         self.spacer.config(text="", pady=20)
 
+        # TODO: add way that after clicking, the right dark side of the root frame, shows the parking
+        # self.btnEnviar.bind()
         self.btnEnviar.config(
             text="Aceptar", font=("Verdana", 10),
             padx=5, pady=5, command=lambda: print("Plate: " + self.inputPlate.get())
