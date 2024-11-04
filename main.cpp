@@ -82,7 +82,7 @@ int main(){
 
                     parking.Entrada(matricula, plaza);
 
-                    parking.getFullData();
+                    std::cout<<parking.getFullData();
                     std::cout.flush();
                 }catch(ParkingException error){
 
