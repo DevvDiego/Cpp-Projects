@@ -114,7 +114,7 @@ class Parking{
     }
 
     std::string getFullData(){
-        //! Place a coma to separate between data (or to mark there needs to be a \n)
+        //! Place a coma to separate between data 
         return std::to_string(this->getTotalSpots())+" Plazas totales,"+
         std::to_string(this->getOccupiedSpots())+"  Plazas ocupadas,"+
         std::to_string(this->getFreeSpots())+"  Plazas disponibles,";
