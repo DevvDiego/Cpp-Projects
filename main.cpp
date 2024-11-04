@@ -70,7 +70,7 @@ int main(){
         try{
 
             send(statusToString(READY));
-            
+
             input(opcion);
 
             switch(opcion){
@@ -98,18 +98,12 @@ int main(){
                 
                 case 2: //salida
                 try{
-                    // std::cout<<"Ingresa la matricula: \n";
-                    // std::cout.flush();
+
                     input(matricula);
 
                     parking.Salida(matricula);
-                    // std::cout<<"----Matricula " + matricula + " eliminado----\n";
 
-                    std::cout<<parking.getTotalSpots()<<" Plazas totales\n";
-                    std::cout<<parking.getOccupiedSpots()<<"  Plazas ocupadas\n";
-                    std::cout<<parking.getFreeSpots()<<"  Plazas disponibles\n";
-
-                    std::cout.flush();
+                    send( parking.getFullData() );
 
                 }catch(ParkingException error){
 
@@ -121,7 +115,8 @@ int main(){
                 break;
                 
                 case 3: //mostrar todo
-                    std::cout<<parking.toString()<<std::endl;
+                    
+                    send( parking.toString() );
                 break;
                 
                 case 4: //salir del programa
