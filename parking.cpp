@@ -84,6 +84,12 @@ class Parking{
             output += "Plaza " + std::to_string(i) + ": " + getSpotPlate(i) + ",";
         }
 
+        // Remove the last comma if the string is not empty
+        if ( !output.empty() && output.back() == ',' ) {
+            
+            output.pop_back();
+        }
+
         return output;
     }
 
