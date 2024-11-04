@@ -44,7 +44,10 @@ void input(T &variableToWrite){
 
 
 void send(std::string msg){
-
+    /**
+     * !Remember to use "," to repalce the newline character on large texts
+     * !or else they will buffer differently when python reads
+     */
     std::cout<<msg + "\n";
     std::cout.flush();
 }
@@ -67,6 +70,7 @@ int main(){
         try{
 
             send(statusToString(READY));
+            
             input(opcion);
 
             switch(opcion){
@@ -82,8 +86,8 @@ int main(){
 
                     parking.Entrada(matricula, plaza);
 
-                    std::cout<<parking.getFullData();
-                    std::cout.flush();
+                    send( parking.getFullData() );
+                    
                 }catch(ParkingException error){
 
                     std::cerr<<"ERROR\n";

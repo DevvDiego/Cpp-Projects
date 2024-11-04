@@ -80,7 +80,7 @@ class Parking{
         output += "---------------,"; 
         
         for (int i = 0; i < plates.size(); i++){
-            //using comma separated values to let python be able to easily separate them.
+            //! using comma separated values to let python be able to easily separate them.
             output += "Plaza " + std::to_string(i) + ": " + getSpotPlate(i) + ",";
         }
 
@@ -108,10 +108,10 @@ class Parking{
     }
 
     std::string getFullData(){
-        
-        return std::to_string(this->getTotalSpots())+" Plazas totales\n"+
-        std::to_string(this->getOccupiedSpots())+"  Plazas ocupadas\n"+
-        std::to_string(this->getFreeSpots())+"  Plazas disponibles\n";
+        //! Place a coma to separate between data (or to mark there needs to be a \n)
+        return std::to_string(this->getTotalSpots())+" Plazas totales,"+
+        std::to_string(this->getOccupiedSpots())+"  Plazas ocupadas,"+
+        std::to_string(this->getFreeSpots())+"  Plazas disponibles,";
     }
 
     private:
