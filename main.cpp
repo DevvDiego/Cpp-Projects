@@ -2,6 +2,29 @@
 #include <limits>
 #include "parking.cpp"
 
+// Communication status for the pipe with python
+enum Status{
+    OK = 1,
+    READY = 2,
+
+    BAD_CALL = 3,
+    BAD_TYPE = 4,
+    BAD_ANSWER = 5,
+};
+
+std::string statusToString(Status st){
+
+    switch(st){
+
+        case OK: return "OK";
+        case READY: return "READY";
+        case BAD_CALL: return "BAD_CALL";
+        case BAD_TYPE: return "BAD_TYPE";
+        case BAD_ANSWER: return "BAD_ANSWER";
+
+        default: return "UNKNOWN";
+    }
+}
 
 /**
  * Uses cin to read from ifstream, and checks if there is a failbit or badbit set or not.
@@ -14,11 +37,17 @@ void input(T &variableToWrite){
     if(std::cin.fail()){ //wrong data type recieved
         
         std::cin.clear();
-        std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n'); //ignore the full stream buff
+        std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' ); //ignore the full stream buff
         throw std::runtime_error("Error de tipo de dato");
     }
 }
 
+
+void send(std::string msg){
+
+    std::cout<<msg + "\n";
+    std::cout.flush();
+}
 
 int main(){
     //TODO Make the parking size to act to the user as a 1-10 not 0-10
@@ -37,42 +66,27 @@ int main(){
 
         try{
 
-            // std::cout<<"\n\n\n-------------------\n";
-            // std::cout<<"Parking centro\n";
-            // std::cout<<"Elige una opcion\n"<<
-            // "1) Entrada de coche\n2) Salida de coche\n3) Mostrar todo\n4) Salir del programa\n";
-            
-            // \b se usa para regresar un caracter anterior en la terminal
-            // std::cout<<"-------(   )-------\b\b\b\b\b\b\b\b\b\b";
-            
+            send(statusToString(READY));
             input(opcion);
-
-            // std::cout<<"\n";
 
             switch(opcion){
 
                 case 1: //entrada
                     
                 try{
-
-                    // std::cout<<"Ingresa la matricula: ";
+                    
+                    // sendStatus();
                     input(matricula);
 
-                    // std::cout<<"Ingresa la plaza: ";
                     input(plaza);
 
                     parking.Entrada(matricula, plaza);
 
-                    // std::cout<<"----Ingreso exitoso----\n";
-
-                    std::cout<<parking.getTotalSpots()<<" Plazas totales\n";
-                    std::cout<<parking.getOccupiedSpots()<<"  Plazas ocupadas\n";
-                    std::cout<<parking.getFreeSpots()<<"  Plazas disponibles\n";
-
+                    parking.getFullData();
                     std::cout.flush();
                 }catch(ParkingException error){
 
-                    std::cerr<<"--------ERROR--------\n";
+                    std::cerr<<"ERROR\n";
                     std::cerr<<error.what()<<"\n";
                     std::cout.flush();
                 }
@@ -80,13 +94,12 @@ int main(){
                 
                 case 2: //salida
                 try{
-                    std::cout<<"Ingresa la matricula: \n";
-                    std::cout.flush();
+                    // std::cout<<"Ingresa la matricula: \n";
+                    // std::cout.flush();
                     input(matricula);
-                    // std::cin>>matricula;
 
                     parking.Salida(matricula);
-                    std::cout<<"----Matricula " + matricula + " eliminado----\n";
+                    // std::cout<<"----Matricula " + matricula + " eliminado----\n";
 
                     std::cout<<parking.getTotalSpots()<<" Plazas totales\n";
                     std::cout<<parking.getOccupiedSpots()<<"  Plazas ocupadas\n";
@@ -104,8 +117,6 @@ int main(){
                 break;
                 
                 case 3: //mostrar todo
-
-                    // std::cout<<"opc 3"<<std::endl;
                     std::cout<<parking.toString()<<std::endl;
                 break;
                 

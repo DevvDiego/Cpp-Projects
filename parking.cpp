@@ -107,6 +107,17 @@ class Parking{
         return this->plates.size() - this->occupiedSpots;
     }
 
+    int getFullData(){
+        std::cout<<this->getTotalSpots()<<" Plazas totales\n";
+        std::cout<<this->getOccupiedSpots()<<"  Plazas ocupadas\n";
+        std::cout<<this->getFreeSpots()<<"  Plazas disponibles\n";
+
+        std::cout<<
+        this->getTotalSpots()<<" Plazas totales\n"<<
+        this->getOccupiedSpots()<<"  Plazas ocupadas\n"<<
+        this->getFreeSpots()<<"  Plazas disponibles\n";
+    }
+
     private:
     bool itExists(std::string item){
 
