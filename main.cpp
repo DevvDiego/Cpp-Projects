@@ -4,12 +4,11 @@
 
 // Communication status for the pipe with python
 enum Status{
-    OK = 1,
-    READY = 2,
-
-    BAD_CALL = 3,
-    BAD_TYPE = 4,
-    BAD_ANSWER = 5,
+    OK,
+    READY,
+    BAD_CALL,
+    BAD_TYPE,
+    BAD_ANSWER,
 };
 
 std::string statusToString(Status st){
@@ -52,6 +51,15 @@ void send(std::string msg){
     std::cout.flush();
 }
 
+void err_send(std::string msg){
+     /**
+     * !Remember to use "," to repalce the newline character on large texts
+     * !or else they will buffer differently when python reads
+     */
+    std::cerr<<msg + "\n";
+    std::cerr.flush();   
+}
+
 int main(){
     //TODO Make the parking size to act to the user as a 1-10 not 0-10
     // ? is it achievable?
@@ -69,8 +77,6 @@ int main(){
 
         try{
 
-            send(statusToString(READY));
-
             input(opcion);
 
             switch(opcion){
@@ -78,21 +84,17 @@ int main(){
                 case 1: //entrada
                     
                 try{
-                    
-                    // sendStatus();
-                    input(matricula);
-
-                    input(plaza);
 
                     parking.Entrada(matricula, plaza);
-
-                    send( parking.getFullData() );
+                    
                     
                 }catch(ParkingException error){
 
-                    std::cerr<<"ERROR\n";
+                    std::cerr<<"--------ERROR--------\n";
                     std::cerr<<error.what()<<"\n";
-                    std::cout.flush();
+
+                    std::cerr.flush();
+                
                 }
                 break;
                 
@@ -110,13 +112,13 @@ int main(){
                     std::cerr<<"--------ERROR--------\n";
                     std::cerr<<error.what()<<"\n";
 
-                    std::cout.flush();
+                    std::cerr.flush();
                 }
                 break;
                 
                 case 3: //mostrar todo
                     
-                    send( parking.toString() );
+                    parking.toString(); 
                 break;
                 
                 case 4: //salir del programa
@@ -128,14 +130,15 @@ int main(){
 
             std::cerr<<"--------ERROR--------\n";
             std::cerr<<error.what()<<"\n";
-            
-            std::cout.flush();
+
+            std::cerr.flush();
+        
         }catch(...){ //any kind of not known errors
             
             std::cerr<<"--------ERROR--------\n";
             std::cerr<<"Error desconocido\n";
             
-            std::cout.flush();
+            std::cerr.flush();
         }
     }
 
