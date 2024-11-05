@@ -24,7 +24,7 @@ class Parking{
         // "" is like a NULL but for std::strings
         if( plate.length() < 4 || plate == "" ){
 
-            throw ParkingException("Matricula incorrecta", __func__, __LINE__);
+            throw ParkingException("Matricula incorrecta");
         }
 
         if( spot >= this->plates.size() ){
@@ -44,12 +44,12 @@ class Parking{
 
         if( !this->plates.at(spot).empty() ){
 
-            throw ParkingException("Plaza ya ocupada", __func__, __LINE__);
+            throw ParkingException("Plaza ya ocupada");
         }
 
         if( itExists(plate) ){
 
-            throw ParkingException("Matricula repetida", __func__, __LINE__);
+            throw ParkingException("Matricula repetida");
         }
 
         this->plates.at(spot) = plate;
@@ -63,7 +63,7 @@ class Parking{
         
         if( result == -1 ){
 
-            throw ParkingException("Matricula no existente", __func__, __LINE__);
+            throw ParkingException("Matricula no existente");
         }
 
         //set spot with a null plate

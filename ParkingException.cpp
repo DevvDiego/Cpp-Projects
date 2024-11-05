@@ -8,8 +8,8 @@ class ParkingException : public std::exception {
     std::string message;
 
     public:
-    explicit ParkingException(const std::string& msg, const std::string& funcName, int lineNumber) {
-        this->message = msg + " (in function [" + funcName + "] at line [" + std::to_string(lineNumber) + "])";
+    explicit ParkingException(const std::string& msg) {
+        this->message = msg;
     }
 
     const char* what() const noexcept override {
