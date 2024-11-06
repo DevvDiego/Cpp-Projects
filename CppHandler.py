@@ -1,5 +1,4 @@
 import subprocess
-import os
 
 def parseInput(str:str):
     str = str.strip().split(",")
@@ -19,28 +18,25 @@ class CppHandler:
             text=True  # Treat the stdin/stdout as text streams (instead of binary)
         )
         
-    # def send(self, msg):
-    #     # Send the user input to the C++ program's stdin
-    #     self.process.stdin.write( str(msg) + "\n" )  # "\n marks end of write"
-    #     self.process.stdin.flush()  # Flush the stream to ensure the input is sent immediately
-
-    # def read(self):        
-    #     return self.process.stdout.readline().strip();
 
     def send(self, msg:str)->None:
         
         self.process.stdin.write(str(msg) + '\n')
         self.process.stdin.flush()
-        return
     
+
     def stdout_read(self):
+        """
+        Read from STDOUT of the subprocess
+        """
         return self.process.stdout.readline().strip()
 
-    def stderr_read(self):
-        return self.process.stderr.readline().strip()
     
-    # def handle_error(self, stderr_ouput:str):
-    #     pass
+    def stderr_read(self):
+        """
+        Read from STDERR of the subprocess
+        """
+        return self.process.stderr.readline().strip()
 
 
     def insertar(self, data:str):
@@ -57,16 +53,6 @@ class CppHandler:
             print("no errors")
             print(self.stdout_read())
 
-        # self.send(1) # opt
-
-        # self.send(data)
-
-        # print( self.read() )#OK code #? unnecessary?
-        # print( self.read() )
-
-        # ! CHECK USAGE possible solution
-        # proc = self.process.stdin.readline().strip()
-        # proc.startswith("OK") #? use??
 
     def salida(self, data:str):
         self.send(2)
@@ -82,11 +68,11 @@ class CppHandler:
             print("no errors")
             print(self.stdout_read())
 
+
     def mostrar(self):
         self.send(3)
 
         print(self.stdout_read())
-        pass
 
 
 
@@ -105,5 +91,3 @@ while True:
     elif(opt == 3):
         cpp.mostrar()
     
-    elif(opt == 0):
-        os.system("cls")

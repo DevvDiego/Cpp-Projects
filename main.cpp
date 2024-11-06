@@ -78,8 +78,7 @@ int main(){
 
     int opcion;
     int endProgram = false;
-    // std::string matricula;
-    // int plaza;
+    
     std::string data;
     std::vector<std::string> data_vec;
 
@@ -110,13 +109,7 @@ int main(){
 
                     cout_send(parking.getFullData());
                     cerr_send("NONE");
-                    
-                    /**
-                     * How do i get to be able to choose when to
-                     * send the full data or the error?
-                     * 
-                     * ? Maybe use error codes in cerr?
-                     */
+
                 }catch(ParkingException error){
                     cerr_send("error");
                     cerr_send(error.what());
@@ -136,13 +129,7 @@ int main(){
 
                     cout_send(parking.getFullData());
                     cerr_send("NONE");
-                    
-                    // input(matricula);
-
-                    // parking.Salida(matricula);
-
-                    // send( parking.getFullData() );
-
+ 
                 }catch(ParkingException error){
                     cerr_send("error");
                     cerr_send(error.what());
