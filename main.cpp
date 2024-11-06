@@ -1,28 +1,32 @@
 #include <iostream>
 #include <limits>
+#include <vector>
 #include "parking.cpp"
 
-// Communication status for the pipe with python
-enum Status{
-    OK,
-    READY,
-    BAD_CALL,
-    BAD_TYPE,
-    BAD_ANSWER,
-};
 
-std::string statusToString(Status st){
+std::vector<std::string> split(std::string& str, const std::string& delimiter) {
+    
+    size_t pos = 0;
+    std::vector<std::string> tokens;
+    std::string token;
 
-    switch(st){
+    while ( (pos = str.find(delimiter)) != std::string::npos) {
+    
+        token = str.substr(0, pos);
+        tokens.push_back(token);
 
-        case OK: return "OK";
-        case READY: return "READY";
-        case BAD_CALL: return "BAD_CALL";
-        case BAD_TYPE: return "BAD_TYPE";
-        case BAD_ANSWER: return "BAD_ANSWER";
-
-        default: return "UNKNOWN";
+        str.erase(0, pos + delimiter.length());
     }
+
+    tokens.push_back(str);
+
+    return tokens;
+}
+
+
+std::vector<std::string> parse(std::string msg){
+
+    return split(msg, ",");
 }
 
 /**
@@ -42,23 +46,31 @@ void input(T &variableToWrite){
 }
 
 
-void send(std::string msg){
+void cout_send(std::string msg){
     /**
-     * !Remember to use "," to repalce the newline character on large texts
-     * !or else they will buffer differently when python reads
+     * !IMPORTANT NOTE
+     * Using a newline escape to mark the end of the data sent
+     * 
+     * python wont parse correctly without it
+     * (wont find and end, and might appear no message was sent)
      */
     std::cout<<msg + "\n";
     std::cout.flush();
 }
 
-void err_send(std::string msg){
-     /**
-     * !Remember to use "," to repalce the newline character on large texts
-     * !or else they will buffer differently when python reads
+void cerr_send(std::string msg){
+    /**
+     * !IMPORTANT NOTE
+     * Using a newline escape to mark the end of the data sent
+     * 
+     * python wont parse correctly without it
+     * (wont find and end, and might appear no message was sent)
      */
     std::cerr<<msg + "\n";
-    std::cerr.flush();   
+    std::cerr.flush();
+
 }
+
 
 int main(){
     //TODO Make the parking size to act to the user as a 1-10 not 0-10
@@ -66,34 +78,48 @@ int main(){
 
     int opcion;
     int endProgram = false;
-    std::string matricula;
-    int plaza;
-
+    // std::string matricula;
+    // int plaza;
+    std::string data;
+    std::vector<std::string> data_vec;
 
 
     Parking parking("Parking Centro", 10);
+
+    std::string messageToSend;
 
     while( !endProgram ){
 
         try{
 
-            input(opcion);
+            input(opcion); //hard coded options, no errors.
 
             switch(opcion){
 
                 case 1: //entrada
                     
                 try{
+                    
+                    input(data);
+                    data_vec = parse(data);
+                    
+                    parking.Entrada(
+                        data_vec.at(0),
+                        std::stoi(data_vec.at(1))
+                    );
 
-                    parking.Entrada(matricula, plaza);
+                    cout_send(parking.getFullData());
+                    cerr_send("NONE");
                     
-                    
+                    /**
+                     * How do i get to be able to choose when to
+                     * send the full data or the error?
+                     * 
+                     * ? Maybe use error codes in cerr?
+                     */
                 }catch(ParkingException error){
-
-                    std::cerr<<"--------ERROR--------\n";
-                    std::cerr<<error.what()<<"\n";
-
-                    std::cerr.flush();
+                    cerr_send("error");
+                    cerr_send(error.what());
                 
                 }
                 break;
@@ -101,11 +127,11 @@ int main(){
                 case 2: //salida
                 try{
 
-                    input(matricula);
+                    // input(matricula);
 
-                    parking.Salida(matricula);
+                    // parking.Salida(matricula);
 
-                    send( parking.getFullData() );
+                    // send( parking.getFullData() );
 
                 }catch(ParkingException error){
 
@@ -118,7 +144,7 @@ int main(){
                 
                 case 3: //mostrar todo
                     
-                    parking.toString(); 
+                    cout_send( parking.toString() );
                 break;
                 
                 case 4: //salir del programa
