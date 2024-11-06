@@ -127,6 +127,16 @@ int main(){
                 case 2: //salida
                 try{
 
+                    input(data);
+                    data_vec = parse(data);
+                    
+                    parking.Salida(
+                        data_vec.at(0)
+                    );
+
+                    cout_send(parking.getFullData());
+                    cerr_send("NONE");
+                    
                     // input(matricula);
 
                     // parking.Salida(matricula);
@@ -134,11 +144,9 @@ int main(){
                     // send( parking.getFullData() );
 
                 }catch(ParkingException error){
-
-                    std::cerr<<"--------ERROR--------\n";
-                    std::cerr<<error.what()<<"\n";
-
-                    std::cerr.flush();
+                    cerr_send("error");
+                    cerr_send(error.what());
+                
                 }
                 break;
                 

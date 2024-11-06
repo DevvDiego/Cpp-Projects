@@ -38,16 +38,20 @@ class CppHandler:
 
     def stderr_read(self):
         return self.process.stderr.readline().strip()
-        
+    
+    # def handle_error(self, stderr_ouput:str):
+    #     pass
+
 
     def insertar(self, data:str):
-        self.send(1)
+        self.send(1) #option
 
-        self.send(data)
+        self.send(data) #comma separated data
 
         error = self.stderr_read()
         if(error == "error"):
-            print("\nerror en insertar " + self.stderr_read())
+            print("error")
+            print(self.stderr_read())
             
         elif(error == "NONE"):
             print("no errors")
@@ -64,8 +68,19 @@ class CppHandler:
         # proc = self.process.stdin.readline().strip()
         # proc.startswith("OK") #? use??
 
-    def salida(self):
-        pass
+    def salida(self, data:str):
+        self.send(2)
+
+        self.send(data)
+
+        error = self.stderr_read()
+        if(error == "error"):
+            print("error")
+            print(self.stderr_read())
+            
+        elif(error == "NONE"):
+            print("no errors")
+            print(self.stdout_read())
 
     def mostrar(self):
         self.send(3)
@@ -79,11 +94,14 @@ cpp = CppHandler()
 
 
 while True:
-    opt = int(input("opt: "))
+    opt = int(input("\nopt: "))
 
     if(opt == 1):
         cpp.insertar(input("comma separated str: "))
     
+    elif(opt == 2):
+        cpp.salida(input("plate: "))
+
     elif(opt == 3):
         cpp.mostrar()
     
