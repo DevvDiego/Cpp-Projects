@@ -9,7 +9,7 @@ class ParkingException : public std::exception {
 
     public:
     explicit ParkingException(const std::string& msg) {
-        this->message = "ERROR" + msg;
+        this->message = "ERROR " + msg;
     }
 
     const char* what() const noexcept override {
