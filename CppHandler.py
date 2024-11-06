@@ -1,11 +1,5 @@
 import subprocess
 
-def parseInput(str:str):
-    str = str.strip().split(",")
-    print(str)
-    return
-
-
 
 class CppHandler:
     
