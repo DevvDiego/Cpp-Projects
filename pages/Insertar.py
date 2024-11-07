@@ -3,7 +3,8 @@ import tkinter as tk
 
 class Insertar:
 
-    def __init__(self, frameContainer):
+    def __init__(self, frameContainer, cppHandler):
+        self.cppHandler = cppHandler
         self.frame = tk.Frame(frameContainer)
 
         self.createWidgets()
@@ -26,7 +27,7 @@ class Insertar:
 
         self.btnEnviar.config(
             text="Aceptar", font=("Verdana", 10),
-            padx=5, pady=5, command=lambda: print("Plate: " + self.inputPlate.get() + " Spot: " + self.spot.get())
+            padx=5, pady=5, command=lambda:self.sendData()
         )
 
     def placeWidgets(self):
@@ -57,7 +58,8 @@ class Insertar:
 
         self.btnEnviar = tk.Button(self.frame)
 
-        # self.btn = tk.Button(self.frame, text="Mandar", command=lambda: print(self.matricula.get()))
-
     def getFrame(self):
         return self.frame
+
+    def sendData(self):
+        self.cppHandler.insertar(self.plate.get() + "," + self.spot.get())

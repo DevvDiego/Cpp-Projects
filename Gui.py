@@ -86,17 +86,10 @@ class gui:
         self.guardar = Guardar(self.container)
         self.pag_guardar = self.guardar.getFrame()
 
-    def get_InsertarData(self):
-        return self.insertar.getData()
-
-    # def get_SalidaData(self):
-    #     return self.salida.getData()
-
-    # def get_GuardarData(self):
-    #     return self.guardar.getData()
-
 # TODO create the menu for each option and add a button to send data and recieve
-    def __init__ (self):
+    def __init__ (self, cppHandler:CppHandler):
+
+        self.cppHandler = cppHandler
 
         self.createWidgets()
         self.configWidgets()
