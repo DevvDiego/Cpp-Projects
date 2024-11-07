@@ -67,21 +67,3 @@ class CppHandler:
         self.send(3)
 
         print(self.stdout_read())
-
-
-
-cpp = CppHandler()
-
-
-while True:
-    opt = int(input("\nopt: "))
-
-    if(opt == 1):
-        cpp.insertar(input("comma separated str: "))
-    
-    elif(opt == 2):
-        cpp.salida(input("plate: "))
-
-    elif(opt == 3):
-        cpp.mostrar()
-    
