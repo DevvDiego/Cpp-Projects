@@ -76,10 +76,10 @@ class gui:
         self.mostrar = Mostrar(self.resultContainer)
         self.pag_mostrar = self.mostrar.getFrame()
 
-        self.insertar = Insertar(self.container)
-        self.pag_insertar = Insertar(self.container).getFrame()
+        self.insertar = Insertar(self.container, self.cppHandler)
+        self.pag_insertar = self.insertar.getFrame()
         
-        self.salida = Salida(self.container)
+        self.salida = Salida(self.container, self.cppHandler)
         self.pag_salida = self.salida.getFrame()
 
         # TODO make saving to a mysql BDD
