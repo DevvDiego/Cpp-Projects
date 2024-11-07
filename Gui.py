@@ -92,6 +92,7 @@ class gui:
         
         self.salida = Salida(
             frameContainer=self.container,
+            mostrarWidget=self.mostrar,
             cppHandler=self.cppHandler
         )
         self.pag_salida = self.salida.getFrame()

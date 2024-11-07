@@ -1,10 +1,12 @@
 import tkinter as tk
 from CppHandler import CppHandler 
-
+from pages.Mostrar import Mostrar
 
 class Salida:
 
-    def __init__(self, frameContainer, cppHandler:CppHandler):
+    def __init__(self, frameContainer, mostrarWidget:Mostrar, cppHandler:CppHandler):
+
+        self.mostrarWidget = mostrarWidget
 
         self.cppHandler = cppHandler
 
@@ -67,3 +69,9 @@ class Salida:
 
     def sendData(self):
         self.cppHandler.salida(self.plate.get())
+        self.updateMostrar()
+
+    def updateMostrar(self):
+        self.mostrarWidget.updateText(
+            text=self.cppHandler.mostrar()
+        )
