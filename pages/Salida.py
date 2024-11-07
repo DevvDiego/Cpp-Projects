@@ -3,7 +3,10 @@ import tkinter as tk
 
 class Salida:
 
-    def __init__(self, frameContainer):
+    def __init__(self, frameContainer, cppHandler):
+
+        self.cppHandler = cppHandler
+
         self.frame = tk.Frame(frameContainer)
 
         self.createWidgets()
@@ -19,16 +22,13 @@ class Salida:
         self.inputPlateLabel.config(text="Ingresa la matricula", font=("Roboto", 12))
         self.inputPlate.config(textvariable=self.plate)
 
-        # self.inputSpotLabel.config(text="Ingresa el lugar", font=("Roboto", 12))
-        # self.inputSpot.config(textvariable=self.spot)
-
         self.spacer.config(text="", pady=20)
 
         # TODO: add way that after clicking, the right dark side of the root frame, shows the parking
         # self.btnEnviar.bind()
         self.btnEnviar.config(
             text="Aceptar", font=("Verdana", 10),
-            padx=5, pady=5, command=lambda: print("Plate: " + self.inputPlate.get())
+            padx=5, pady=5, command=lambda: self.sendData
         )
 
     def placeWidgets(self):
@@ -63,3 +63,6 @@ class Salida:
 
     def getFrame(self):
         return self.frame
+
+    def sendData(self):
+        self.cppHandler.salida(self.plate.get())
