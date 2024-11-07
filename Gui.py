@@ -68,15 +68,19 @@ class gui:
         self.buttonframe = tk.Frame(self.container)
 
 
+
         self.btn_ingresar = tk.Button(self.buttonframe)
         self.btn_salida = tk.Button(self.buttonframe)
         # ? self.btn_mostrar = tk.Button(self.buttonframe) #remove button? "dynamic" reload?
         self.btn_guardar = tk.Button(self.buttonframe)
 
+
+
         self.mostrar = Mostrar(
             frameContainer=self.resultContainer
         )
         self.pag_mostrar = self.mostrar.getFrame()
+
 
         self.insertar = Insertar(
             frameContainer=self.container, 
@@ -85,17 +89,21 @@ class gui:
         )
         self.pag_insertar = self.insertar.getFrame()
         
+        
         self.salida = Salida(
             frameContainer=self.container,
             cppHandler=self.cppHandler
         )
         self.pag_salida = self.salida.getFrame()
 
+
         # TODO make saving to a mysql BDD
         self.guardar = Guardar(
             frameContainer=self.container
         )
         self.pag_guardar = self.guardar.getFrame()
+
+
 
 # TODO create the menu for each option and add a button to send data and recieve
     def __init__ (self, cppHandler):

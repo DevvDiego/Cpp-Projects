@@ -38,3 +38,13 @@ class Mostrar:
 
     def getFrame(self):
         return self.frame
+    
+    def updateText(self, text:str):
+        # enable to be able to insert text, disable to disable writing on it
+        self.text.config(state="normal")
+
+        self.text.delete("1.0",tk.END)
+        self.text.insert(index=tk.END, chars=text)
+        
+
+        self.text.config(state="disabled")
