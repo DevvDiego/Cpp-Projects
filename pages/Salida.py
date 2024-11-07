@@ -1,9 +1,10 @@
 import tkinter as tk
+from CppHandler import CppHandler 
 
 
 class Salida:
 
-    def __init__(self, frameContainer, cppHandler):
+    def __init__(self, frameContainer, cppHandler:CppHandler):
 
         self.cppHandler = cppHandler
 
@@ -28,7 +29,7 @@ class Salida:
         # self.btnEnviar.bind()
         self.btnEnviar.config(
             text="Aceptar", font=("Verdana", 10),
-            padx=5, pady=5, command=lambda: self.sendData
+            padx=5, pady=5, command=self.sendData
         )
 
     def placeWidgets(self):
