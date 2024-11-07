@@ -52,5 +52,5 @@ class Mostrar:
 
         self.text.config(state="disabled")
 
-    def parseText(text:str):
+    def parseText(self, text:str):
         return text.replace(",", "\n")
