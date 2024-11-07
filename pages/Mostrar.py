@@ -44,7 +44,13 @@ class Mostrar:
         self.text.config(state="normal")
 
         self.text.delete("1.0",tk.END)
-        self.text.insert(index=tk.END, chars=text)
+        self.text.insert(
+            index=tk.END, 
+            chars=self.parseText(text)
+        )
         
 
         self.text.config(state="disabled")
+
+    def parseText(text:str):
+        return text.replace(",", "\n")
