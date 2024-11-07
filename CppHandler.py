@@ -64,8 +64,7 @@ class CppHandler:
 
     def mostrar(self):
         self.send(3)
-
-        print(self.stdout_read())
+        return self.stdout_read()
 
     def endProgram(self):
         self.send(4)
