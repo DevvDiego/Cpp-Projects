@@ -73,17 +73,28 @@ class gui:
         # ? self.btn_mostrar = tk.Button(self.buttonframe) #remove button? "dynamic" reload?
         self.btn_guardar = tk.Button(self.buttonframe)
 
-        self.mostrar = Mostrar(self.resultContainer)
+        self.mostrar = Mostrar(
+            frameContainer=self.resultContainer
+        )
         self.pag_mostrar = self.mostrar.getFrame()
 
-        self.insertar = Insertar(self.container, self.cppHandler)
+        self.insertar = Insertar(
+            frameContainer=self.container, 
+            mostrarWidget=self.mostrar, 
+            cppHandler=self.cppHandler
+        )
         self.pag_insertar = self.insertar.getFrame()
         
-        self.salida = Salida(self.container, self.cppHandler)
+        self.salida = Salida(
+            frameContainer=self.container,
+            cppHandler=self.cppHandler
+        )
         self.pag_salida = self.salida.getFrame()
 
         # TODO make saving to a mysql BDD
-        self.guardar = Guardar(self.container)
+        self.guardar = Guardar(
+            frameContainer=self.container
+        )
         self.pag_guardar = self.guardar.getFrame()
 
 # TODO create the menu for each option and add a button to send data and recieve
