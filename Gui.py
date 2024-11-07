@@ -87,7 +87,7 @@ class gui:
         self.pag_guardar = self.guardar.getFrame()
 
 # TODO create the menu for each option and add a button to send data and recieve
-    def __init__ (self, cppHandler:CppHandler):
+    def __init__ (self, cppHandler):
 
         self.cppHandler = cppHandler
 
