@@ -62,8 +62,10 @@ class CppHandler:
             print("no errors")
             print(self.stdout_read())
 
-
     def mostrar(self):
         self.send(3)
 
         print(self.stdout_read())
+
+    def endProgram(self):
+        self.send(4)
