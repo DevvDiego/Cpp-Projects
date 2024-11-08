@@ -15,7 +15,7 @@ mysql = MySqlHandler(sqlCredentials)
 gui(
 
     cppHandler=cpp,
-    dbHandler=mysql,
+    mysqlHandler=mysql,
 
 )
 
