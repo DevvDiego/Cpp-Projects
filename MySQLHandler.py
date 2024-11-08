@@ -24,6 +24,7 @@ class MySqlHandler:
     def read(self, val:str):
         query = "SELECT * FROM matriculas WHERE matricula =" + val;
         self.cursor.execute(query)
+        self.db.commit();
         result = self.cursor.fetchall();
 
         print("MySQL read action");
@@ -32,6 +33,6 @@ class MySqlHandler:
     def delete(self, val:str):
         query = "DELETE FROM matriculas WHERE matricula =" + val;
         self.cursor.execute(query)
-
+        self.db.commit();
         print("MySQL delete action");
         return
