@@ -2,8 +2,15 @@ from Gui import gui
 from CppHandler import CppHandler
 from MySQLHandler import MySqlHandler
 
+sqlCredentials = {
+    "host":"localhost",
+    "database":"pysql",
+    "user":"root",
+    "password":"",
+}
+
 cpp = CppHandler()
-mysql = MySqlHandler()
+mysql = MySqlHandler(sqlCredentials)
 
 gui(
 
