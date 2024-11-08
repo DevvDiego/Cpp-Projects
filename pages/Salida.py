@@ -1,15 +1,16 @@
 import tkinter as tk
 from CppHandler import CppHandler 
+from MySQLHandler import MySqlHandler
 from pages.Mostrar import Mostrar
 
 class Salida:
 
-    def __init__(self, frameContainer, mostrarWidget:Mostrar, cppHandler:CppHandler):
+    def __init__(self, frameContainer, mostrarWidget:Mostrar, cppHandler:CppHandler, mysqlHandler:MySqlHandler):
 
         self.mostrarWidget = mostrarWidget
 
         self.cppHandler = cppHandler
-
+        self.mysqlHandler = mysqlHandler
         self.frame = tk.Frame(frameContainer)
 
         self.createWidgets()
@@ -70,8 +71,12 @@ class Salida:
     def sendData(self):
         self.cppHandler.salida(self.plate.get())
         self.updateMostrar()
+        self.deleteFromMySql()
 
     def updateMostrar(self):
         self.mostrarWidget.updateText(
             text=self.cppHandler.mostrar()
         )
+
+    def deleteFromMySql(self):
+        self.mysqlHandler.delete(self.plate.get())

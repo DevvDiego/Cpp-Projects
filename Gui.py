@@ -94,7 +94,8 @@ class gui:
         self.salida = Salida(
             frameContainer=self.container,
             mostrarWidget=self.mostrar,
-            cppHandler=self.cppHandler
+            cppHandler=self.cppHandler,
+            mysqlHandler=self.mysqlHandler
         )
         self.pag_salida = self.salida.getFrame()
 
