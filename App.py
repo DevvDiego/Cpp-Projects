@@ -1,11 +1,24 @@
 from Gui import gui 
 from CppHandler import CppHandler
+from MySQLHandler import MySqlHandler
 
 cpp = CppHandler()
+mysql = MySqlHandler()
 
-gui(cppHandler=cpp)
+gui(
+
+    cppHandler=cpp,
+    dbHandler=mysql,
+
+)
 
 
-# After the tkinter gui has been killed, the subprocess might still be
+# After the tkinter gui has been killed
+
+
+
+
+# Kill the subprocess
 # running in the background
-cpp.endProgram() # Salida del subproceso
+# by using its own end
+cpp.endProgram();
