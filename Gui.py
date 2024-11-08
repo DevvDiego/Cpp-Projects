@@ -85,7 +85,8 @@ class gui:
         self.insertar = Insertar(
             frameContainer=self.container, 
             mostrarWidget=self.mostrar, 
-            cppHandler=self.cppHandler
+            cppHandler=self.cppHandler,
+            mysqlHandler=self.mysqlHandler
         )
         self.pag_insertar = self.insertar.getFrame()
         
@@ -107,9 +108,10 @@ class gui:
 
 
 # TODO create the menu for each option and add a button to send data and recieve
-    def __init__ (self, cppHandler):
+    def __init__ (self, cppHandler, mysqlHandler):
 
         self.cppHandler = cppHandler
+        self.mysqlHandler = mysqlHandler
 
         self.createWidgets()
         self.configWidgets()

@@ -1,13 +1,15 @@
 import tkinter as tk
 from CppHandler import CppHandler
+from MySQLHandler import MySqlHandler
 from pages.Mostrar import Mostrar
 
 
 class Insertar:
 
-    def __init__(self, frameContainer, mostrarWidget:Mostrar , cppHandler:CppHandler):
+    def __init__(self, frameContainer, mostrarWidget:Mostrar, cppHandler:CppHandler, mysqlHandler:MySqlHandler ):
         self.mostrarWidget = mostrarWidget
         self.cppHandler = cppHandler
+        self.mysqlHandler = mysqlHandler
         self.frame = tk.Frame(frameContainer)
 
         self.createWidgets()
@@ -67,8 +69,14 @@ class Insertar:
     def sendData(self):
         self.cppHandler.insertar(self.plate.get() + "," + self.spot.get())
         self.updateMostrar()
+        self.saveToMySql()
 
     def updateMostrar(self):
         self.mostrarWidget.updateText(
             text=self.cppHandler.mostrar()
+        )
+
+    def saveToMySql(self):
+        self.mysqlHandler.insert(
+            vals=(self.plate.get(), self.spot.get())
         )
