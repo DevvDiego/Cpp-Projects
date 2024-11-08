@@ -7,10 +7,66 @@ from pages.Salida import Salida
 
 class gui:
 
+    def __init__ (self, cppHandler, mysqlHandler):
 
-    def show(self, frame):
-        frame.lift()
-        self.buttonframe.lift()
+        self.cppHandler = cppHandler
+        self.mysqlHandler = mysqlHandler
+
+        self.createWidgets()
+        self.configWidgets()
+        self.placeWidgets()
+
+        # First page to show in the UI
+        self.show(self.pag_insertar)
+
+        self.root.mainloop()
+
+    def createWidgets(self):
+        self.root = tk.Tk()
+
+        self.container = tk.Frame(self.root, width=10)
+        self.resultContainer = tk.Frame(self.root)
+        self.buttonframe = tk.Frame(self.container)
+
+
+
+        self.btn_ingresar = tk.Button(self.buttonframe)
+        self.btn_salida = tk.Button(self.buttonframe)
+        # ? self.btn_mostrar = tk.Button(self.buttonframe) #remove button? "dynamic" reload?
+        self.btn_guardar = tk.Button(self.buttonframe)
+
+
+
+        self.mostrar = Mostrar(
+            frameContainer=self.resultContainer
+        )
+        self.pag_mostrar = self.mostrar.getFrame()
+
+
+        self.insertar = Insertar(
+            frameContainer=self.container, 
+            mostrarWidget=self.mostrar, 
+            cppHandler=self.cppHandler,
+            mysqlHandler=self.mysqlHandler,
+        )
+        self.pag_insertar = self.insertar.getFrame()
+        
+        
+        self.salida = Salida(
+            frameContainer=self.container,
+            mostrarWidget=self.mostrar,
+            cppHandler=self.cppHandler,
+            mysqlHandler=self.mysqlHandler,
+        )
+        self.pag_salida = self.salida.getFrame()
+
+
+        # TODO make saving to a mysql BDD
+        self.guardar = Guardar(
+            frameContainer=self.container
+        )
+        self.pag_guardar = self.guardar.getFrame()
+
 
 
     def configWidgets(self):
@@ -58,67 +114,7 @@ class gui:
         # self.btn_mostrar.pack(side="left", padx=(0,5)) #CHECK createWidgets
         self.btn_guardar.pack(side="left", padx=(0,5))
 
-    def createWidgets(self):
-        self.root = tk.Tk()
-        # self.root.wm_attributes('-transparentcolor', 'white')
 
-
-        self.container = tk.Frame(self.root, width=10)
-        self.resultContainer = tk.Frame(self.root)
-        self.buttonframe = tk.Frame(self.container)
-
-
-
-        self.btn_ingresar = tk.Button(self.buttonframe)
-        self.btn_salida = tk.Button(self.buttonframe)
-        # ? self.btn_mostrar = tk.Button(self.buttonframe) #remove button? "dynamic" reload?
-        self.btn_guardar = tk.Button(self.buttonframe)
-
-
-
-        self.mostrar = Mostrar(
-            frameContainer=self.resultContainer
-        )
-        self.pag_mostrar = self.mostrar.getFrame()
-
-
-        self.insertar = Insertar(
-            frameContainer=self.container, 
-            mostrarWidget=self.mostrar, 
-            cppHandler=self.cppHandler,
-            mysqlHandler=self.mysqlHandler
-        )
-        self.pag_insertar = self.insertar.getFrame()
-        
-        
-        self.salida = Salida(
-            frameContainer=self.container,
-            mostrarWidget=self.mostrar,
-            cppHandler=self.cppHandler,
-            mysqlHandler=self.mysqlHandler
-        )
-        self.pag_salida = self.salida.getFrame()
-
-
-        # TODO make saving to a mysql BDD
-        self.guardar = Guardar(
-            frameContainer=self.container
-        )
-        self.pag_guardar = self.guardar.getFrame()
-
-
-
-# TODO create the menu for each option and add a button to send data and recieve
-    def __init__ (self, cppHandler, mysqlHandler):
-
-        self.cppHandler = cppHandler
-        self.mysqlHandler = mysqlHandler
-
-        self.createWidgets()
-        self.configWidgets()
-        self.placeWidgets()
-
-
-        self.show(self.pag_insertar)
-
-        self.root.mainloop()
+    def show(self, frame):
+        frame.lift()
+        self.buttonframe.lift()
