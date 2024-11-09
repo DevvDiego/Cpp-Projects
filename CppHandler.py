@@ -24,8 +24,8 @@ class CppHandler:
         Read from STDOUT of the subprocess
         """
         return self.process.stdout.readline().strip()
+ 
 
-    
     def stderr_read(self):
         """
         Read from STDERR of the subprocess
@@ -38,14 +38,27 @@ class CppHandler:
 
         self.send(data) #comma separated data
 
-        error = self.stderr_read()
-        if(error == "error"):
-            print("error")
-            print(self.stderr_read())
+        # TODO handle errors here and in each page
+
+        # For checking errors, if no errors then
+        # we expect to stout to have some data
+        # otherwise if we find an error on stderr
+        # we dont expect nothing so we dont read stdout
+
+        status = self.stderr_read();
+        if(status == "error"):
+
+            return {
+                "status":"error",
+                "message":self.stderr_read()
+                }
             
-        elif(error == "NONE"):
-            print("no errors")
-            print(self.stdout_read())
+        elif(status == "success"):
+            
+            return {
+                "status":"success",
+                "message":self.stdout_read()
+                }            
 
 
     def salida(self, data:str):
@@ -53,18 +66,26 @@ class CppHandler:
 
         self.send(data)
 
-        error = self.stderr_read()
-        if(error == "error"):
-            print("error")
-            print(self.stderr_read())
+        status = self.stderr_read();
+        if(status == "error"):
+
+            return {
+                "status":"error",
+                "message":self.stderr_read()
+                }
             
-        elif(error == "NONE"):
-            print("no errors")
-            print(self.stdout_read())
+        elif(status == "success"):
+            
+            return {
+                "status":"success",
+                "message":self.stdout_read()
+                }            
+
 
     def mostrar(self):
         self.send(3)
         return self.stdout_read()
+
 
     def endProgram(self):
         self.send(4)

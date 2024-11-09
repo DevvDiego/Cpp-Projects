@@ -71,9 +71,17 @@ class Salida:
         return self.frame
 
     def sendData(self):
-        self.cppHandler.salida(self.plate.get())
-        self.updateMostrar()
-        self.deleteFromMySql()
+        result = self.cppHandler.salida(
+            self.plate.get()
+        )
+
+        if(result["status"] == "success"):
+            self.updateMostrar()
+            self.deleteFromMySql()
+        
+        elif(result["status"] == "error"):
+            print("error found in cpp")
+            print(result)
 
     def updateMostrar(self):
         self.mostrarWidget.updateText(

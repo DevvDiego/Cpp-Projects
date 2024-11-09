@@ -68,9 +68,18 @@ class Insertar:
         return self.frame
 
     def sendData(self):
-        self.cppHandler.insertar(self.plate.get() + "," + self.spot.get())
-        self.updateMostrar()
-        self.saveToMySql()
+        result = self.cppHandler.insertar(
+            self.plate.get() + "," + self.spot.get()
+        )
+
+        if(result["status"] == "success"):
+            self.updateMostrar()
+            self.saveToMySql()
+        
+        elif(result["status"] == "error"):
+            print("error found in cpp")
+            print(result)
+
 
     def updateMostrar(self):
         self.mostrarWidget.updateText(

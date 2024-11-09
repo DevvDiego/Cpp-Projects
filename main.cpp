@@ -108,12 +108,12 @@ int main(){
                     );
 
                     cout_send(parking.getFullData());
-                    cerr_send("NONE");
+                    cerr_send("success");
 
                 }catch(ParkingException error){
+                    
                     cerr_send("error");
                     cerr_send(error.what());
-                
                 }
                 break;
                 
@@ -128,7 +128,7 @@ int main(){
                     );
 
                     cout_send(parking.getFullData());
-                    cerr_send("NONE");
+                    cerr_send("success");
  
                 }catch(ParkingException error){
                     cerr_send("error");
