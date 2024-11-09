@@ -3,21 +3,24 @@ import mysql.connector as SQL
 mysql = SQL
 
 class MySqlHandler:
-    #TODO make the conn and cursor part of every event of the class
+
     def __init__(self, credentials:dict):
-        self.db = mysql.connect(
-            host = credentials["host"],
-            database = credentials["database"],
-            user = credentials["user"],
-            password = credentials["password"],
-        )
+        self.credentials = credentials
+    
 
-        self.cursor = self.db.cursor();
+    def dbexecute(self, query:str, values:tuple):
+        conn = mysql.connect(**self.credentials); #discompose the dict
+        cursor = conn.cursor();
+        
+        cursor.execute(query, values);
+        conn.commit();
 
-    def insert(self, vals:tuple):
+        cursor.close();
+        conn.close();
+
+    def insert(self, values:tuple):
         query = "INSERT INTO matriculas (matricula, plaza) VALUES (%s, %s)";
-        self.cursor.execute(query, vals)
-        self.db.commit()
+        self.dbexecute(query, values);
 
         print("MySQL insert action");
 
@@ -30,9 +33,10 @@ class MySqlHandler:
         print("MySQL read action");
         return result
     
-    def delete(self, val:str):
-        query = "DELETE FROM matriculas WHERE matricula =" + val;
-        self.cursor.execute(query)
-        self.db.commit();
+    def delete(self, values:tuple):
+        query = "DELETE FROM matriculas WHERE matricula = %s";
+        self.dbexecute(query, values);
+
+
         print("MySQL delete action");
         return

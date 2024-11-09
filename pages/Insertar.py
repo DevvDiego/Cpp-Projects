@@ -1,8 +1,9 @@
 import tkinter as tk
-from CppHandler import CppHandler
-from MySQLHandler import MySqlHandler
 from pages.Mostrar import Mostrar
 
+# imports only for type checking
+from CppHandler import CppHandler 
+from MySQLHandler import MySqlHandler 
 
 class Insertar:
 
@@ -78,5 +79,5 @@ class Insertar:
 
     def saveToMySql(self):
         self.mysqlHandler.insert(
-            vals=(self.plate.get(), self.spot.get())
+            (self.plate.get(), self.spot.get())
         )

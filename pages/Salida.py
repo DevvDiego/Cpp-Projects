@@ -1,7 +1,9 @@
 import tkinter as tk
-from CppHandler import CppHandler 
-from MySQLHandler import MySqlHandler
 from pages.Mostrar import Mostrar
+
+# imports only for type checking
+from CppHandler import CppHandler 
+from MySQLHandler import MySqlHandler 
 
 class Salida:
 
@@ -79,4 +81,8 @@ class Salida:
         )
 
     def deleteFromMySql(self):
-        self.mysqlHandler.delete(self.plate.get())
+        self.mysqlHandler.delete(
+            (self.plate.get() , ) #! use a comma to make it a real tuple
+        )
+
+        
