@@ -4,13 +4,27 @@ from pages.Insertar import Insertar
 from pages.Mostrar import Mostrar 
 from pages.Salida import Salida 
 
+#imports only for type cheking
+from CppHandler import CppHandler
+from MySQLHandler import MySqlHandler
 
 class gui:
 
-    def __init__ (self, cppHandler, mysqlHandler):
+    def __init__ (self, cppHandler:CppHandler, mysqlHandler:MySqlHandler):
 
         self.cppHandler = cppHandler
         self.mysqlHandler = mysqlHandler
+
+        rows = self.mysqlHandler.readAll()
+        
+        for row in rows:
+            uid, plate, spot = row
+            # print(uid)
+            print(str(plate) + ", " + str(spot))
+            # print(type(plate))
+            # print(type(spot))
+
+
 
         self.createWidgets()
         self.configWidgets()
