@@ -138,8 +138,15 @@ int main(){
                 break;
                 
                 case 3: //mostrar todo
+                    try{
+                        cout_send( parking.toString() );
+                        cerr_send("success");
                     
-                    cout_send( parking.toString() );
+                    }catch(ParkingException error){
+                        cerr_send("error");
+                        cerr_send(error.what());
+                    }
+                    
                 break;
                 
                 case 4: //salir del programa

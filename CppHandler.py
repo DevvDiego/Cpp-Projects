@@ -34,6 +34,11 @@ class CppHandler:
 
 
     def insertar(self, data:str):
+        """
+        NOTE keep the data str comma separates like "123,123"
+        not like "123, 123"
+        """
+
         self.send(1) #option
 
         self.send(data) #comma separated data
