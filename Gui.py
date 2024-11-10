@@ -15,23 +15,14 @@ class gui:
         self.cppHandler = cppHandler
         self.mysqlHandler = mysqlHandler
 
-        rows = self.mysqlHandler.readAll()
-        
-        for row in rows:
-            uid, plate, spot = row
-            # print(uid)
-            print(str(plate) + ", " + str(spot))
-            # print(type(plate))
-            # print(type(spot))
-
-
-
         self.createWidgets()
         self.configWidgets()
         self.placeWidgets()
 
         # First page to show in the UI
         self.show(self.pag_insertar)
+
+        self.db_getMostrarData();
 
         self.root.mainloop()
 
@@ -132,3 +123,22 @@ class gui:
     def show(self, frame):
         frame.lift()
         self.buttonframe.lift()
+
+    def db_getMostrarData(self):
+        rows = self.mysqlHandler.read_all()
+        
+        for row in rows:
+            uid, plate, spot = row
+
+            result = self.cppHandler.insertar(
+                str(plate) + "," + str(spot)
+            );
+
+            if(result["status"] == "success"):
+                self.mostrar.updateText(
+                    self.cppHandler.mostrar()
+                )
+            
+            elif(result["status"] == "error"):
+                print("error found in cpp")
+                print(result)
