@@ -66,11 +66,11 @@ class gui:
         self.pag_salida = self.salida.getFrame()
 
 
-        # TODO make saving to a mysql BDD
-        self.guardar = Guardar(
-            frameContainer=self.container
-        )
-        self.pag_guardar = self.guardar.getFrame()
+        # # TODO make saving to a mysql BDD
+        # self.guardar = Guardar(
+        #     frameContainer=self.container
+        # )
+        # self.pag_guardar = self.guardar.getFrame()
 
 
 
@@ -96,10 +96,10 @@ class gui:
             text="Salida",  width=8, cursor="hand2",
             command=lambda: self.show(self.pag_salida)
         )
-        self.btn_guardar.config(
-            text="Guardar", width=8, cursor="hand2", 
-            command=lambda: self.show(self.pag_guardar)
-        )
+        # self.btn_guardar.config(
+        #     text="Guardar", width=8, cursor="hand2", 
+        #     command=lambda: self.show(self.pag_guardar)
+        # )
         
     def placeWidgets(self):
         self.container.grid(row=0,column=0, sticky="nswe",)
@@ -112,12 +112,11 @@ class gui:
 
         self.pag_insertar.place(x=0, y=0, relwidth=1, relheight=1)
         self.pag_salida.place(x=0, y=0, relwidth=1, relheight=1)
-        self.pag_guardar.place(x=0, y=0, relwidth=1, relheight=1)
+        # self.pag_guardar.place(x=0, y=0, relwidth=1, relheight=1)
 
         self.btn_ingresar.pack(side="left", padx=(0,5))
         self.btn_salida.pack(side="left", padx=(0,5))
-        # self.btn_mostrar.pack(side="left", padx=(0,5)) #CHECK createWidgets
-        self.btn_guardar.pack(side="left", padx=(0,5))
+        # self.btn_guardar.pack(side="left", padx=(0,5))
 
 
     def show(self, frame):
