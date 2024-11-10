@@ -124,9 +124,16 @@ class gui:
         frame.lift()
         self.buttonframe.lift()
 
+    # ! When a error is raised, app will crash, why?????
     def db_getMostrarData(self):
         rows = self.mysqlHandler.read_all()
         
+        if ( len(rows) == 0  ):
+            # Show parking empty
+            self.mostrar.updateText(
+                self.cppHandler.mostrar()
+            )
+
         for row in rows:
             uid, plate, spot = row
 
