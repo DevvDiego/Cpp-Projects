@@ -3,7 +3,7 @@ import mysql.connector as SQL
 mysql = SQL
 
 class MySqlHandler:
-    isRead = False; #internal flag to mark a read operation
+    # isRead = False; #internal flag to mark a read operation
 
     def __init__(self, credentials:dict):
         self.credentials = credentials
