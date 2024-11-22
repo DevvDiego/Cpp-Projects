@@ -51,14 +51,14 @@ class MySqlHandler:
 
         print("MySQL delete action"); 
 
-    def update(self, old:str, new:str):
+    def update(self, oldPlate:str, oldSpot:str, newPlate:str, newSpot:str):
         query = """
             UPDATE matriculas 
-            SET matricula=%s
-            WHERE matricula=%s
+            SET matricula=%s, plaza=%s
+            WHERE matricula=%s AND plaza=%s
         """
 
-        values = (new, old)
+        values = (oldPlate, oldSpot, newPlate, newSpot)
 
         conn = mysql.connect(**self.credentials); #discompose the dict
         cursor = conn.cursor();
