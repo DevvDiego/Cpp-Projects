@@ -1,5 +1,5 @@
 import tkinter as tk
-from pages.Guardar import Guardar 
+# from pages.Guardar import Guardar 
 from pages.Insertar import Insertar 
 from pages.Mostrar import Mostrar 
 from pages.Salida import Salida
