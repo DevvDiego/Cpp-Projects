@@ -50,4 +50,25 @@ class MySqlHandler:
         conn.close();
 
         print("MySQL delete action"); 
-        
+
+    def update(self, old:str, new:str):
+        query = """
+            UPDATE matriculas 
+            SET matricula=%s
+            WHERE matricula=%s
+        """
+
+        values = (new, old)
+
+        conn = mysql.connect(**self.credentials); #discompose the dict
+        cursor = conn.cursor();
+
+        cursor.execute(
+            operation=query,
+            params=values
+        );
+        conn.commit()
+
+        cursor.close();
+        conn.close();
+
