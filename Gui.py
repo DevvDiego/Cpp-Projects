@@ -2,7 +2,8 @@ import tkinter as tk
 from pages.Guardar import Guardar 
 from pages.Insertar import Insertar 
 from pages.Mostrar import Mostrar 
-from pages.Salida import Salida 
+from pages.Salida import Salida
+from pages.Modificar import Modificar 
 
 #imports only for type cheking
 from CppHandler import CppHandler
@@ -39,7 +40,7 @@ class gui:
         self.btn_salida = tk.Button(self.buttonframe)
         # ? self.btn_mostrar = tk.Button(self.buttonframe) #remove button? "dynamic" reload?
         self.btn_guardar = tk.Button(self.buttonframe)
-
+        self.btn_modificar = tk.Button(self.buttonframe)
 
 
         self.mostrar = Mostrar(
@@ -71,7 +72,14 @@ class gui:
         #     frameContainer=self.container
         # )
         # self.pag_guardar = self.guardar.getFrame()
-
+        
+        self.modificar = Modificar(
+            frameContainer=self.container,
+            mostrarWidget=self.mostrar,
+            cppHandler=self.cppHandler,
+            mysqlHandler=self.mysqlHandler,
+        )
+        self.pag_modificar = self.modificar.getFrame()
 
 
     def configWidgets(self):
@@ -96,6 +104,10 @@ class gui:
             text="Salida",  width=8, cursor="hand2",
             command=lambda: self.show(self.pag_salida)
         )
+        self.btn_modificar.config(
+            text="Modificar",  width=8, cursor="hand2",
+            command=lambda: self.show(self.pag_modificar)
+        )
         # self.btn_guardar.config(
         #     text="Guardar", width=8, cursor="hand2", 
         #     command=lambda: self.show(self.pag_guardar)
@@ -113,10 +125,12 @@ class gui:
         self.pag_insertar.place(x=0, y=0, relwidth=1, relheight=1)
         self.pag_salida.place(x=0, y=0, relwidth=1, relheight=1)
         # self.pag_guardar.place(x=0, y=0, relwidth=1, relheight=1)
+        self.pag_modificar.place(x=0, y=0, relwidth=1, relheight=1)
 
         self.btn_ingresar.pack(side="left", padx=(0,5))
         self.btn_salida.pack(side="left", padx=(0,5))
         # self.btn_guardar.pack(side="left", padx=(0,5))
+        self.btn_modificar.pack(side="left", padx=(0,5))
 
 
     def show(self, frame):
