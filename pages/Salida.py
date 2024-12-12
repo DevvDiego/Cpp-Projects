@@ -1,4 +1,5 @@
 import tkinter as tk
+from pages.Page import Page
 from pages.Mostrar import Mostrar
 
 # imports only for type checking
@@ -8,12 +9,7 @@ from MySQLHandler import MySqlHandler
 class Salida:
 
     def __init__(self, frameContainer, mostrarWidget:Mostrar, cppHandler:CppHandler, mysqlHandler:MySqlHandler):
-
-        self.mostrarWidget = mostrarWidget
-
-        self.cppHandler = cppHandler
-        self.mysqlHandler = mysqlHandler
-        self.frame = tk.Frame(frameContainer)
+        super().__init__(frameContainer, mostrarWidget, cppHandler, mysqlHandler)
 
         self.createWidgets()
         self.configWidgets()

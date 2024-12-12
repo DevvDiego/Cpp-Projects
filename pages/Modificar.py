@@ -1,16 +1,14 @@
 import tkinter as tk
+from pages.Page import Page
 from pages.Mostrar import Mostrar
 
 # imports only for type checking
 from CppHandler import CppHandler 
 from MySQLHandler import MySqlHandler 
 
-class Modificar:
-    def __init__(self, frameContainer, mostrarWidget:Mostrar, cppHandler:CppHandler, mysqlHandler:MySqlHandler ):
-        self.mostrarWidget = mostrarWidget
-        self.cppHandler = cppHandler
-        self.mysqlHandler = mysqlHandler
-        self.frame = tk.Frame(frameContainer)
+class Modificar(Page):
+    def __init__(self, frameContainer, mostrarWidget:Mostrar, cppHandler:CppHandler, mysqlHandler:MySqlHandler):
+        super().__init__(frameContainer, mostrarWidget, cppHandler, mysqlHandler)
 
         self.createWidgets()
         self.configWidgets()

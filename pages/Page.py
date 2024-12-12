@@ -5,6 +5,9 @@ from pages.Mostrar import Mostrar
 from CppHandler import CppHandler 
 from MySQLHandler import MySqlHandler 
 
+#Keep recieving the handlers from outer class
+#to just keep one instance of them running
+
 class Page:
 
     def __init__(self, frameContainer, mostrarWidget:Mostrar, cppHandler:CppHandler, mysqlHandler:MySqlHandler ):
