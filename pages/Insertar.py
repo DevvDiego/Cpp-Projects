@@ -1,17 +1,11 @@
 import tkinter as tk
+from Page import Page
 from pages.Mostrar import Mostrar
 
-# imports only for type checking
-from CppHandler import CppHandler 
-from MySQLHandler import MySqlHandler 
+class Insertar(Page):
 
-class Insertar:
-
-    def __init__(self, frameContainer, mostrarWidget:Mostrar, cppHandler:CppHandler, mysqlHandler:MySqlHandler ):
-        self.mostrarWidget = mostrarWidget
-        self.cppHandler = cppHandler
-        self.mysqlHandler = mysqlHandler
-        self.frame = tk.Frame(frameContainer)
+    def __init__(self, frameContainer, mostrarWidget:Mostrar):
+        super().__init__(frameContainer, mostrarWidget)
 
         self.createWidgets()
         self.configWidgets()
@@ -64,9 +58,6 @@ class Insertar:
 
         self.btnEnviar = tk.Button(self.frame)
 
-    def getFrame(self):
-        return self.frame
-
     def sendData(self):
         result = self.cppHandler.insertar(
             self.plate.get() + "," + self.spot.get()
@@ -79,7 +70,6 @@ class Insertar:
         elif(result["status"] == "error"):
             print("error found in cpp")
             print(result)
-
 
     def updateMostrar(self):
         self.mostrarWidget.updateText(
