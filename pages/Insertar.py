@@ -1,11 +1,15 @@
 import tkinter as tk
-from Page import Page
+from pages.Page import Page
 from pages.Mostrar import Mostrar
+
+# imports only for type checking
+from CppHandler import CppHandler 
+from MySQLHandler import MySqlHandler 
 
 class Insertar(Page):
 
-    def __init__(self, frameContainer, mostrarWidget:Mostrar):
-        super().__init__(frameContainer, mostrarWidget)
+    def __init__(self, frameContainer, mostrarWidget:Mostrar, cppHandler:CppHandler, mysqlHandler:MySqlHandler):
+        super().__init__(frameContainer, mostrarWidget, cppHandler, mysqlHandler)
 
         self.createWidgets()
         self.configWidgets()
